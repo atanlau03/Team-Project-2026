@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>DevTeam — Home</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=DM+Sans:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav class="navbar">
+    <div class="nav-logo">Dev<span>Team</span></div>
+    <ul class="nav-links">
+      <li><a href="index.html" class="active">Home</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+    <a href="login.html" class="nav-btn">Login</a>
+    <div class="hamburger" onclick="toggleMenu()">&#9776;</div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-bg-circle c1"></div>
+    <div class="hero-bg-circle c2"></div>
+    <div class="hero-content">
+      <span class="badge">Week 7 — Group Project</span>
+      <h1>Build Together,<br><em>Ship Faster.</em></h1>
+      <p>A collaborative web application built by our team using Git & GitHub version control workflows.</p>
+      <div class="hero-btns">
+        <a href="about.html" class="btn-primary">Meet the Team</a>
+        <a href="contact.html" class="btn-ghost">Get in Touch</a>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="code-card">
+        <div class="code-header">
+          <span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span>
+          <span class="code-title">terminal</span>
+        </div>
+        <div class="code-body">
+          <p><span class="c-green">$</span> git checkout -b <span class="c-yellow">feature-homepage</span></p>
+          <p><span class="c-green">$</span> git add .</p>
+          <p><span class="c-green">$</span> git commit -m <span class="c-cyan">"Added hero section"</span></p>
+          <p><span class="c-green">$</span> git push origin <span class="c-yellow">feature-homepage</span></p>
+          <p class="blink"><span class="c-green">$</span> <span class="cursor">█</span></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FEATURES -->
+  <section class="features">
+    <h2 class="section-title">What We Built</h2>
+    <div class="cards">
+      <div class="card" style="--delay:0s">
+        <div class="card-icon">🏠</div>
+        <h3>Homepage</h3>
+        <p>Landing page with hero section, navigation, and feature highlights.</p>
+      </div>
+      <div class="card" style="--delay:.1s">
+        <div class="card-icon">🔐</div>
+        <h3>Login Page</h3>
+        <p>User authentication form with validation and clean UI design.</p>
+      </div>
+      <div class="card" style="--delay:.2s">
+        <div class="card-icon">👥</div>
+        <h3>About Page</h3>
+        <p>Team members profile cards with roles and contributions.</p>
+      </div>
+      <div class="card" style="--delay:.3s">
+        <div class="card-icon">📬</div>
+        <h3>Contact Page</h3>
+        <p>Contact form with input validation and submission feedback.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <p>© 2024 DevTeam · Built with ❤️ using HTML, CSS & JavaScript</p>
+  </footer>
+
+  <script src="js/script.js"></script>
+</body>
+</html>

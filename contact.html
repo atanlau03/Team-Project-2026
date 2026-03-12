@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>DevTeam — Contact</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=DM+Sans:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <nav class="navbar">
+    <div class="nav-logo"><a href="index.html" style="text-decoration:none;color:inherit">Dev<span>Team</span></a></div>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="contact.html" class="active">Contact</a></li>
+    </ul>
+    <a href="login.html" class="nav-btn">Login</a>
+    <div class="hamburger" onclick="toggleMenu()">&#9776;</div>
+  </nav>
+
+  <section class="page-hero">
+    <div class="hero-bg-circle c1"></div>
+    <div class="hero-bg-circle c2"></div>
+    <span class="badge">Contact Us</span>
+    <h1>Let's Start a<br>Conversation 💬</h1>
+    <p>Have a question or feedback? We'd love to hear from you.</p>
+  </section>
+
+  <section class="contact-section">
+    <div class="contact-info">
+      <div class="info-item">
+        <span class="info-icon">📧</span>
+        <div>
+          <h4>Email</h4>
+          <p>devteam@example.com</p>
+        </div>
+      </div>
+      <div class="info-item">
+        <span class="info-icon">📍</span>
+        <div>
+          <h4>Location</h4>
+          <p>Indonesia</p>
+        </div>
+      </div>
+      <div class="info-item">
+        <span class="info-icon">🐙</span>
+        <div>
+          <h4>GitHub</h4>
+          <p>github.com/Team-Project-2024</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="contact-form-wrap">
+      <form id="contactForm" onsubmit="handleContact(event)">
+        <div class="form-group">
+          <label>Full Name</label>
+          <input type="text" id="cName" placeholder="Your name" required/>
+          <span class="error-msg" id="cNameError"></span>
+        </div>
+        <div class="form-group">
+          <label>Email</label>
+          <input type="email" id="cEmail" placeholder="you@example.com" required/>
+          <span class="error-msg" id="cEmailError"></span>
+        </div>
+        <div class="form-group">
+          <label>Subject</label>
+          <input type="text" id="cSubject" placeholder="What's this about?"/>
+        </div>
+        <div class="form-group">
+          <label>Message</label>
+          <textarea id="cMessage" rows="5" placeholder="Write your message here..." required></textarea>
+          <span class="error-msg" id="cMessageError"></span>
+        </div>
+        <button type="submit" class="btn-primary full-width">Send Message 🚀</button>
+      </form>
+      <div id="contactSuccess" class="success-msg" style="display:none">
+        ✅ Message sent! We'll get back to you soon.
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <p>© 2024 DevTeam · Built with ❤️ using HTML, CSS & JavaScript</p>
+  </footer>
+
+  <script src="js/script.js"></script>
+</body>
+</html>

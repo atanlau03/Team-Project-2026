@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>DevTeam — About</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=DM+Sans:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <nav class="navbar">
+    <div class="nav-logo"><a href="index.html" style="text-decoration:none;color:inherit">Dev<span>Team</span></a></div>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="about.html" class="active">About</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+    <a href="login.html" class="nav-btn">Login</a>
+    <div class="hamburger" onclick="toggleMenu()">&#9776;</div>
+  </nav>
+
+  <section class="page-hero">
+    <div class="hero-bg-circle c1"></div>
+    <div class="hero-bg-circle c2"></div>
+    <span class="badge">Our Team</span>
+    <h1>The People<br>Behind the Code</h1>
+    <p>Four developers, one goal — build something great together.</p>
+  </section>
+
+  <section class="team-section">
+    <div class="team-grid">
+
+      <div class="team-card" style="--delay:0s">
+        <div class="team-avatar">👨‍💻</div>
+        <div class="team-info">
+          <h3>Nama Anggota 1</h3>
+          <span class="team-role">Frontend Lead</span>
+          <p>Responsible for Homepage & Navigation structure.</p>
+          <div class="team-tags">
+            <span>HTML</span><span>CSS</span><span>JS</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="team-card" style="--delay:.1s">
+        <div class="team-avatar">👩‍💻</div>
+        <div class="team-info">
+          <h3>Nama Anggota 2</h3>
+          <span class="team-role">Auth Developer</span>
+          <p>Built the Login page with full form validation logic.</p>
+          <div class="team-tags">
+            <span>HTML</span><span>CSS</span><span>JS</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="team-card" style="--delay:.2s">
+        <div class="team-avatar">🧑‍💻</div>
+        <div class="team-info">
+          <h3>Nama Anggota 3</h3>
+          <span class="team-role">UI Designer</span>
+          <p>Designed the About page and team profile layout.</p>
+          <div class="team-tags">
+            <span>HTML</span><span>CSS</span><span>Design</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="team-card" style="--delay:.3s">
+        <div class="team-avatar">👨‍🎨</div>
+        <div class="team-info">
+          <h3>Nama Anggota 4</h3>
+          <span class="team-role">Integration Dev</span>
+          <p>Created the Contact page and JS form handling.</p>
+          <div class="team-tags">
+            <span>HTML</span><span>CSS</span><span>JS</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <section class="about-workflow">
+    <h2 class="section-title">Our Git Workflow</h2>
+    <div class="workflow-steps">
+      <div class="step"><div class="step-num">01</div><h4>Branch</h4><p>Each member works on their own feature branch.</p></div>
+      <div class="step-arrow">→</div>
+      <div class="step"><div class="step-num">02</div><h4>Commit</h4><p>At least 3 meaningful commits per person.</p></div>
+      <div class="step-arrow">→</div>
+      <div class="step"><div class="step-num">03</div><h4>Pull Request</h4><p>Open a PR and request team review.</p></div>
+      <div class="step-arrow">→</div>
+      <div class="step"><div class="step-num">04</div><h4>Merge</h4><p>Approve and merge into main branch.</p></div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <p>© 2024 DevTeam · Built with ❤️ using HTML, CSS & JavaScript</p>
+  </footer>
+
+  <script src="js/script.js"></script>
+</body>
+</html>
