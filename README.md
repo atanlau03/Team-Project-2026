@@ -1,4 +1,4 @@
-# Team-Project-2024
+# Team-Project-2026
 
 ## Project Description
 A simple web application built with HTML, CSS, and JavaScript.
@@ -7,8 +7,8 @@ A simple web application built with HTML, CSS, and JavaScript.
  Name  GitHub Username  Task 
 |------|----------------|------|
 |  Atan | atanlau03 | all of the code |
-|  Gelsi | @username2 | Login Page |
-| [Nama 3] | @username3 | About Page |
+|  Gelsi | gelsysha | Login Page |
+| saong li] |  | About Page |
 | [Nama 4] | @username4 | Contact Page |
 
 ## Tech Stack
