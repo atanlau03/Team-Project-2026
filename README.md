@@ -1,12 +1,14 @@
 DAILY SPRINT LOG
 
 --- Saturday, April 18 --- 
+
 UI/UX Foundation
 - Goal: Design the visual layout and core theme of the application.
 - Activity: Drafted the initial UI components
 - Status: Completed.
   
 --- Sunday, April 19 --- 
+
 Frontend Development
 - Goal: Develop the functional frontend structure using React and Tailwind CSS.
 - Activity: Developed the UI layout for the analysis and set up the navigation routing
@@ -18,6 +20,7 @@ Data Acquisition & Pre-processing
 - Status: Completed.
   
 --- Monday, April 20 --- 
+
 Backend & Security
 - Goal: Build the authentication system and server-side foundation.
 - Activity: Developed the Login and Register modules. Set up the FastAPI server to handle future image processing requests.
@@ -34,6 +37,7 @@ Environment Setup & Model Selection
 - Status: Completed.
   
 --- Tuesday, April 21 – Wednesday, April 22 ---
+
 UI Refinement & Logic Integration
 - Goal: Modify the UI and functions to ensure high connectivity between components.
 - Activity: Optimized the state management to ensure user data flows correctly from "Upload" to "Results."
