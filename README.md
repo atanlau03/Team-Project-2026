@@ -10,7 +10,7 @@ UI/UX Foundation
 --- Sunday, April 19 --- 
 
 Frontend Development
-- Goal: Develop the functional frontend structure using React and Tailwind CSS.
+- Goal: Develop the functional frontend structure.
 - Activity: Developed the UI layout for the analysis and set up the navigation routing
 - Status: In Progress (UI Completed, Functional Logic Pending)
 
