@@ -1,0 +1,28 @@
+# FastAPI core
+fastapi[standard]>=0.115.0
+uvicorn[standard]>=0.30.0
+
+# Database
+sqlalchemy[asyncio]>=2.0.30
+asyncpg>=0.29.0
+alembic>=1.13.0
+
+# Auth
+fastapi-users[sqlalchemy]>=13.0.0
+httpx-oauth>=0.15.0
+
+# Settings
+pydantic-settings>=2.5.0
+
+# PDF generation
+reportlab>=4.1.0
+
+# Image processing
+Pillow>=10.0.0
+ultralytics>=8.0.0
+opencv-python-headless>=4.8.0
+
+# Utilities
+python-jose[cryptography]>=3.3.0
+passlib[bcrypt]>=1.7.4
+aiofiles>=23.0.0

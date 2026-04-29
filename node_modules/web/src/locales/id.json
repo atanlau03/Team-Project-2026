@@ -1,0 +1,656 @@
+{
+  "nav": {
+    "dashboard": "Dashboard",
+    "new_analysis": "Analisis Baru",
+    "history": "Riwayat",
+    "simulator": "Simulator",
+    "settings": "Pengaturan",
+    "en_id": "EN/ID",
+    "logout": "Logout"
+  },
+  "common": {
+    "save": "Simpan",
+    "cancel": "Batal",
+    "delete": "Hapus",
+    "edit": "Edit",
+    "loading": "Memuat...",
+    "generating": "Menghasilkan...",
+    "search": "Cari",
+    "selected": "Terpilih"
+  },
+  "settings": {
+    "title": "Konfigurasi",
+    "subtitle": "Kelola profil pribadi Anda, atur setelan bawaan laboratorium, dan ubah preferensi aplikasi.",
+    "profile": {
+      "title": "Profil Peneliti",
+      "subtitle": "Kelola identitas dan kredensial laboratorium Anda.",
+      "name": "Nama Lengkap",
+      "email": "Alamat Email Terdaftar",
+      "lab": "Nama Organisasi / Laboratorium",
+      "save": "Simpan Perubahan",
+      "saving": "Menyinkronkan...",
+      "saved": "Profil Berhasil Diperbarui",
+      "change_photo": "Ubah Foto",
+      "full_name": "Nama Lengkap",
+      "name_placeholder": "misal: Dr. Jane Doe",
+      "lab_placeholder": "misal: Lab BioCore"
+    },
+    "defaults": {
+      "title": "Perpustakaan Pengenalan AI",
+      "subtitle": "Kemampuan Model Saat Ini",
+      "model_info": "YOLOv11 Laboratory Core",
+      "classes": "24 Spesies Patogen Terdeteksi",
+      "agar": "Jenis Media Dioptimalkan",
+      "ready": "Siap",
+      "additional_classes": "+ 9 kelas identifikasi tambahan",
+      "lab_config_title": "Konfigurasi Laboratorium",
+      "lab_config_subtitle": "Atur parameter analisis bawaan untuk alur kerja Anda.",
+      "volume_label": "Volume Plating Bawaan (ml)",
+      "dilution_label": "Faktor Pengenceran Bawaan (10^n)",
+      "save_btn": "Simpan Bawaan Lab"
+    },
+    "messages": {
+      "profile_success": "Profil peneliti berhasil disinkronkan.",
+      "profile_error": "Gagal memperbarui profil. Silakan coba lagi.",
+      "settings_success": "Preferensi sistem diperbarui.",
+      "settings_error": "Gagal memperbarui preferensi.",
+      "avatar_success": "Avatar laboratorium diperbarui.",
+      "avatar_error": "Gagal mengunggah avatar.",
+      "export_success": "Ekspor log audit dimulai.",
+      "export_error": "Gagal mengekspor log audit."
+    },
+    "appearance": {
+      "title": "Estetika",
+      "theme_title": "Tema Visual",
+      "theme_desc": "Pilih kepadatan visual aplikasi.",
+      "light": "Mode Terang",
+      "dark": "Mode Gelap",
+      "lang_title": "Bahasa Sistem",
+      "lang_desc": "Pilih lokalisasi utama yang Anda inginkan.",
+      "interface_customization": "Kustomisasi Antarmuka"
+    },
+    "storage": {
+      "title": "Integritas Data & Kepatuhan",
+      "health": "Kesehatan Sistem",
+      "integrity": "Skor Integritas",
+      "audit_status": "Status Audit",
+      "current": "Terbaru",
+      "validation_progress": "Kemajuan Validasi Data",
+      "archived_desc": "Catatan dengan kepercayaan tinggi diarsipkan",
+      "export_audit_title": "Ekspor Jejak Audit Lengkap",
+      "export_audit_desc": "Unduh riwayat kriptografi lengkap dari semua peristiwa laboratorium dan modifikasi hitungan.",
+      "exporting": "Mengekspor...",
+      "download_csv": "Unduh CSV"
+    },
+    "footer": "© 2026 DeepMind Laboratory Systems. Hak cipta dilindungi undang-undang."
+  },
+  "auth": {
+    "login": {
+      "title": "PlateSense",
+      "subtitle": "Akses aman ke lingkungan analitis Anda.",
+      "success_reg": "Akun berhasil dibuat! Silakan masuk.",
+      "email": "Alamat Email",
+      "password": "Kata Sandi",
+      "remember": "Ingat Saya",
+      "forgot": "Lupa Kata Sandi?",
+      "submit": "Masuk",
+      "submitting": "Masuk...",
+      "or": "atau",
+      "google": "Lanjutkan dengan Google",
+      "no_account": "Belum punya akun?",
+      "register_link": "Daftar",
+      "google_error": "Google OAuth tidak tersedia.",
+      "errors": {
+        "bad_credentials": "Email atau kata sandi salah. Silakan coba lagi.",
+        "user_not_verified": "Silakan verifikasi email Anda sebelum masuk.",
+        "generic": "Gagal masuk. Silakan periksa kredensial Anda."
+      }
+    },
+    "register": {
+      "title": "Buat Arsip",
+      "subtitle": "Buat profil peneliti untuk memulai analisis.",
+      "full_name": "Nama Lengkap",
+      "lab_name": "Laboratorium / Institusi",
+      "email": "Alamat Email",
+      "password": "Kata Sandi",
+      "submit": "Aktifkan Akun",
+      "submitting": "Membuat akun...",
+      "google": "Daftar dengan Google",
+      "has_account": "Sudah punya akun?",
+      "login_link": "Masuk",
+      "password_mismatch": "Kata sandi tidak cocok.",
+      "password_length": "Kata sandi harus minimal 8 karakter.",
+      "errors": {
+        "user_already_exists": "Akun dengan email ini sudah ada.",
+        "invalid_password": "Kata sandi tidak memenuhi kriteria yang diperlukan.",
+        "generic": "Gagal mendaftar. Silakan coba lagi."
+      }
+    },
+    "verify": {
+      "bad_token": "Tautan verifikasi tidak valid atau kadaluwarsa."
+    },
+    "reset": {
+      "bad_token": "Tautan setel ulang tidak valid atau kadaluwarsa."
+    },
+    "oauth": {
+      "completing": "Menyelesaikan autentikasi..."
+    },
+    "panel": {
+      "login_hero_title1": "Menetapkan",
+      "login_hero_title2": "Kebenaran Definitif",
+      "login_hero_title3": "dalam Mikrobiologi.",
+      "register_hero_title1": "Mulai Perjalanan Anda",
+      "register_hero_title2": "menuju",
+      "register_hero_title3": "Presisi Sempurna.",
+      "join_researchers": "Bergabung dengan 2.400+ peneliti",
+      "trusted_by": "Dipercaya oleh laboratorium global",
+      "feature_ai_title": "Analisis Koloni AI",
+      "feature_ai_desc": "Penghitungan presisi untuk berbagai media mikrobiologi.",
+      "feature_battle_title": "Simulator Mode Pertempuran",
+      "feature_battle_desc": "Pelatihan interaktif untuk memvalidasi keahlian analis.",
+      "feature_lab_title": "Hub Lab Terpusat",
+      "feature_lab_desc": "Riwayat aman dan manajemen organisasi kolaboratif."
+    }
+  },
+  "landing": {
+    "nav": {
+      "features": "Fitur",
+      "solutions": "Solusi",
+      "methodology": "Metodologi",
+      "support": "Dukungan",
+      "login": "Masuk",
+      "demo": "Pesan Demo"
+    },
+    "hero": {
+      "tag": "Edisi Arsip Taktil v2.4",
+      "title": "Masa Depan Analisis Mikroba",
+      "subtitle": "Gantikan penghitungan manual subjektif dengan presisi AI deterministik. PlateSense memberikan data mikrobiologi yang tidak dapat diubah dan siap audit dalam hitungan milidetik, bukan jam.",
+      "cta_deploy": "Terapkan PlateSense",
+      "cta_whitepaper": "Baca Whitepaper",
+      "scan_complete": "PEMINDAIAN SELESAI",
+      "confidence": "Keyakinan"
+    },
+    "features": {
+      "title": "Platform Mikrobiologi Cerdas",
+      "subtitle": "PlateSense menggabungkan penghitungan AI presisi tinggi dengan simulasi laboratorium interaktif, memberikan ekosistem lengkap untuk analisis mikrobiologi modern.",
+      "accuracy_title": "99,4% Akurasi AI",
+      "accuracy_desc": "Model visi kepemilikan kami dilatih pada jutaan cawan yang dianotasi, mendeteksi morfologi halus yang luput dari penglihatan manusia.",
+      "accuracy_chip": "ISO 11133 Tervalidasi",
+      "speed_title": "Hasil Deterministik Instan",
+      "speed_desc": "Transformasikan proses manual yang membosankan menjadi aliran data waktu nyata. Apa yang membutuhkan waktu berjam-jam bagi seorang analis untuk menghitung diolah secara instan.",
+      "speed_manual": "Pemrosesan Manual",
+      "speed_manual_val": "~4.5 jam/batch",
+      "speed_ai": "PlateSense AI",
+      "speed_ai_val": "< 0,8 detik /cawan",
+      "battle_mode_title": "Simulator Pelatihan Interaktif",
+      "battle_mode_desc": "Asah keterampilan Anda dengan simulator Battle Mode kami. Bersaing melawan AI dalam penghitungan koloni real-time untuk memvalidasi keahlian dan meningkatkan akurasi.",
+      "human_loop_title": "Intervensi Manusia",
+      "human_loop_desc": "Cawan anomali yang ditandai secara otomatis diarahkan ke mikrobiolog senior untuk tinjauan akhir sebelum pengarsipan.",
+      "explainable_title": "AI yang Dapat Dijelaskan",
+      "explainable_desc": "Heatmap visual melapisi setiap pemindaian, menunjukkan dengan tepat fitur morfologi mana yang memicu klasifikasi."
+    },
+    "workflow": {
+      "title": "Alur Kerja Presisi",
+      "subtitle": "Analisis mikrobiologi yang disederhanakan dalam tiga langkah mudah.",
+      "step1_title": "Pengaturan & Unggah",
+      "step1_desc": "Tentukan parameter media dan unggah citra cawan petri beresolusi tinggi ke cloud analisis yang aman.",
+      "step2_title": "Inferensi AI Otonom",
+      "step2_desc": "Model visi mutakhir mendeteksi, menghitung, dan mengklasifikasikan koloni dengan presisi sub-milidetik.",
+      "step3_title": "Verifikasi & Laporan",
+      "step3_desc": "Tinjau hasil AI yang dapat dijelaskan, validasi anomali secara manual, dan buat laporan analitik yang tidak dapat diubah."
+    },
+    "testimonial": {
+      "quote": "\"Implementasi PlateSense tidak hanya mempercepat alur kerja kami; ini secara mendasar mengubah cara kami memandang integritas data. Kecemasan akan kesalahan penghitungan manual telah hilang. Kami sekarang mengelola arsip kebenaran definitif.\"",
+      "author": "Dr. Sarah Jenkins",
+      "role": "Peneliti Utama, Nexus Biologics"
+    },
+    "cta": {
+      "title": "Tingkatkan presisi lab Anda hari ini.",
+      "subtitle": "Bergabunglah dengan institusi penelitian terkemuka yang menggunakan PlateSense untuk menetapkan standar baru kebenaran mikrobiologis.",
+      "get_started": "Mulai Sekarang",
+      "contact": "Hubungi Penjualan Teknis",
+      "footer": "Tidak diperlukan kartu kredit untuk konsultasi awal."
+    },
+    "footer": {
+      "copyright": "© 2024 PlateSense Technologies. Edisi Arsip Taktil.",
+      "privacy": "Kebijakan Privasi",
+      "terms": "Ketentuan Layanan",
+      "iso": "Sertifikasi ISO",
+      "support": "Hubungi Dukungan Lab"
+    }
+  },
+  "history": {
+    "title": "Riwayat Analisis",
+    "subtitle": "Hasilkan dan ekspor laporan ringkasan, lacak hasil lab, dan akurasi AI dari waktu ke waktu.",
+    "download_pdf": "Unduh PDF",
+    "throughput": {
+      "title": "Hasil Mingguan",
+      "plates": "Pelat Dianalisis",
+      "vs_last_week": "vs minggu lalu"
+    },
+    "confidence": {
+      "title": "Rata-rata Keyakinan AI",
+      "score": "Skor",
+      "accuracy_gain": "peningkatan akurasi"
+    },
+    "anomalies": {
+      "title": "Anomali Ditandai",
+      "plates": "Pelat",
+      "requires_review": "perlu ditinjau"
+    },
+    "data_grid": {
+      "search_placeholder": "Cari riwayat...",
+      "export_csv": "Ekspor CSV",
+      "col_date": "Tanggal",
+      "col_user": "Pengguna/Teknisi",
+      "col_plates": "Pelat Diproses",
+      "col_avg_cfu": "Rata-rata CFU",
+      "col_status": "Status",
+      "col_sample_id": "ID Sampel",
+      "col_media_type": "Tipe Media",
+      "col_count": "Jumlah Koloni",
+      "col_cfu": "CFU/ml",
+      "col_action": "Aksi",
+      "status_verified": "Terverifikasi",
+      "status_pending": "Menunggu OCR",
+      "status_failed": "Gagal",
+      "action_view": "Lihat Detail",
+      "date_range": "Rentang Tanggal",
+      "advanced_filters": "Filter Lanjutan",
+      "no_matching": "Laporan tidak ditemukan.",
+      "no_reports": "Belum ada analisis terverifikasi.",
+      "pagination_info": "Menampilkan {{start}} sampai {{end}} dari {{total}} entri",
+      "unknown": "Tidak Diketahui",
+      "finalized_short": "Selesai",
+      "pending_short": "Menunggu",
+      "delete_title": "Hapus Analisis"
+    },
+    "admin": {
+      "title": "Riwayat Tim",
+      "subtitle": "Pilih pengguna untuk melihat riwayat analisis mereka.",
+      "view_history": "Lihat Riwayat",
+      "back_to_users": "Kembali ke Pengguna",
+      "user_history_title": "Riwayat {{name}}",
+      "user_history_desc": "Melihat riwayat analisis untuk {{name}}."
+    },
+    "filters": {
+      "all_statuses": "Semua Status",
+      "finalized": "Selesai",
+      "pending_review": "Menunggu Tinjauan",
+      "draft": "Draf",
+      "additional_opts": "Opsi pemfilteran tambahan akan muncul di sini."
+    },
+    "messages": {
+      "confirm_delete": "Apakah Anda yakin ingin menghapus analisis untuk sampel {{sampleId}}? Tindakan ini tidak dapat dibatalkan.",
+      "delete_success": "Sampel {{sampleId}} berhasil dihapus.",
+      "delete_error": "Gagal menghapus sampel {{sampleId}}."
+    }
+  },
+  "dashboard": {
+    "welcome": "Selamat datang kembali",
+    "subtitle": "Berikut adalah gambaran umum aktivitas penghitungan pelat laboratorium Anda.",
+    "new_analysis": "Analisis Baru",
+    "system_status": "Status Sistem",
+    "optimal": "Optimal",
+    "stats": {
+      "total_processed": "Total Diproses",
+      "avg_confidence": "Rata-rata Keyakinan",
+      "anomalies": "Anomali",
+      "unverified": "Belum Terverifikasi"
+    },
+    "recent_activity": {
+      "title": "Aktivitas Terbaru",
+      "view_all": "Lihat Semua"
+    },
+    "action_required": {
+      "title": "Tindakan Diperlukan"
+    },
+    "workspace_overview": "Ikhtisar Ruang Kerja",
+    "peak_volume": "Volume Puncak",
+    "confidence_label": "KEPERCAYAAN",
+    "last_cal": "Kal terakhir",
+    "recalibrate": "Kalibrasi Ulang",
+    "researcher": "Peneliti",
+    "time": {
+      "morning": "Pagi",
+      "afternoon": "Siang",
+      "evening": "Sore",
+      "just_now": "Baru saja",
+      "mins_ago": "{{count}}m yang lalu",
+      "hours_ago": "{{count}}j yang lalu",
+      "days_ago": "{{count}}h yang lalu"
+    },
+    "ai_analyzer": "Penganalisis Otomatis",
+    "batch_scan_finished": "menyelesaikan pemindaian batch",
+    "cfu_trend": "Tren Rata-rata CFU/ml",
+    "analyses_per_day": "Analisis per Hari",
+    "this_week": "Minggu Ini",
+    "trends": {
+      "team": "Tren Kontaminasi Tim",
+      "user": "Tren Kontaminasi {{name}}",
+      "weekly": "Tren Kontaminasi Mingguan",
+      "subtitle": "Konsentrasi rata-rata CFU/ml per hari",
+      "avg_label": "Konsentrasi Rata-rata"
+    },
+    "activity": {
+      "live": "Langsung",
+      "none": "Tidak ada aktivitas terbaru ditemukan."
+    },
+    "species": {
+      "title": "Spesies Teratas Ditemukan",
+      "detected": "Terdeteksi",
+      "none": "Belum ada data spesies yang tersedia."
+    },
+    "samples": {
+      "team_users": "Pengguna Tim",
+      "user_recent": "Sampel Terbaru {{name}}",
+      "recent": "Sampel yang Baru Dianalisis",
+      "view_history": "Lihat Riwayat",
+      "finalized": "Selesai",
+      "pending": "Tertunda"
+    },
+    "admin": {
+      "volume_title": "Volume Analisis Global",
+      "finalized_label": "Analisis Selesai",
+      "audit_integrity": "Integritas Audit",
+      "verified": "Terverifikasi",
+      "workforce_title": "Tenaga Kerja Global",
+      "total_users": "Total Pengguna",
+      "researchers": "Peneliti",
+      "admins": "Admin",
+      "manage_users": "Kelola Pengguna",
+      "reach_title": "Jangkauan Organisasi",
+      "active_orgs": "Organisasi Berlisensi Aktif",
+      "system_status": "Status Sistem",
+      "optimal": "Optimal",
+      "network_load": "Beban Jaringan",
+      "stable": "Stabil"
+    },
+    "researcher": {
+      "total_plates": "Total Pelat Hari Ini",
+      "plates_unit": "Pelat",
+      "verification_progress": "Kemajuan Verifikasi",
+      "start_verification": "Mulai Verifikasi",
+      "new_analysis": "Analisis Baru"
+    }
+  },
+  "panel": {
+      "title": "Admin",
+      "console": "Konsol",
+      "subtitle": "Administrasi laboratorium tingkat lanjut dan orkestrasi pengguna. Pantau kesehatan sistem global dan kelola kontrol akses dengan presisi.",
+      "platform_core": "Inti Platform",
+      "health": "Kesehatan Sistem",
+      "optimal": "OPTIMAL",
+      "stats": {
+        "total_users": "Total Pengguna",
+        "researchers": "Peneliti",
+        "admins": "Admin",
+        "analyses": "Analisis",
+        "finalized": "Selesai",
+        "organizations": "Organisasi"
+      },
+      "directory": {
+        "title": "Direktori Pengguna",
+        "active_ids": "Pengidentifikasi Global Aktif",
+        "search_placeholder": "Cari nama, email atau ID...",
+        "all_roles": "Semua Peran Fungsional",
+        "researchers": "Peneliti",
+        "administrators": "Administrator",
+        "syncing": "Menyinkronkan direktori...",
+        "col_user": "Pengguna Teridentifikasi",
+        "col_group": "Grup Akses",
+        "col_privilege": "Tingkat Hak Istimewa",
+        "col_verification": "Verifikasi",
+        "col_actions": "Hub Aksi",
+        "individual": "Individu",
+        "joined": "Bergabung",
+        "authenticated": "Tersertifikasi",
+        "revoked": "Dicabut",
+        "revoke_admin": "Cabut Hak Admin",
+        "grant_admin": "Berikan Hak Admin",
+        "deactivate": "Nonaktifkan Akun",
+        "activate": "Aktifkan Akun",
+        "no_results": "Hasil tidak ditemukan",
+        "no_results_desc": "Sesuaikan pencarian atau filter Anda untuk menemukan anggota laboratorium tertentu."
+      },
+      "pagination": {
+        "viewing_index": "Menampilkan Indeks",
+        "of": "dari",
+        "master_pages": "Halaman Utama",
+        "prev": "Sebelumnya",
+        "next": "Berikutnya"
+      },
+      "footer": "© 2026 DeepMind Laboratory Systems. Hak cipta dilindungi undang-undang."
+    },
+  "new_analysis": {
+    "steps": {
+      "upload": "Unggah & Pengaturan",
+      "ai": "Hasil AI",
+      "report": "Konfirmasi & Laporan"
+    },
+    "guidebook": {
+      "title": "Buku Panduan Analisis",
+      "subtitle": "Pelajari cara menggunakan platform PlateSense",
+      "how_to": "Cara Menggunakan",
+      "got_it": "Mengerti, mari mulai analisis!",
+      "overview": {
+        "title": "Ikhtisar",
+        "desc": "PlateSense menggunakan visi komputer mutakhir untuk mengotomatisasi penghitungan koloni bakteri. Alur kerja ini dibagi menjadi tiga tahap berbeda yang dirancang untuk memastikan akurasi ilmiah dan audibilitas."
+      },
+      "setup": {
+        "title": "Konfigurasi & Parameter",
+        "media_title": "Profil Media Mikrobiologi",
+        "media_subtitle": "Konfigurasi Sistem Deteksi",
+        "tsa_desc": "Media serbaguna yang mendukung berbagai macam bakteri aerob dan jamur.",
+        "macconkey_desc": "Media selektif dan diferensial yang digunakan untuk mengisolasi bakteri enterik Gram-negatif.",
+        "blood_desc": "Media yang diperkaya yang digunakan untuk menumbuhkan organisme cerewet dan mendeteksi aktivitas hemolitik.",
+        "sda_desc": "Selektif untuk jamur (ragi dan kapang) karena pH-nya yang rendah dan konsentrasi glukosa yang tinggi.",
+        "volume_title": "Volume Plated",
+        "volume_desc": "Jumlah persis sampel cair yang disebar di permukaan agar. Protokol standar menggunakan 0,1 mL untuk pelat sebar atau 1,0 mL untuk pelat tuang.",
+        "dilution_title": "Faktor Pengenceran",
+        "dilution_desc": "Eksponen negatif dari pengenceran serial Anda. -4 mewakili pengenceran 1:10.000, digunakan untuk melacak kembali ke kepadatan sampel asli."
+      },
+      "ai": {
+        "title": "Mesin Inferensi AI",
+        "autonomous_title": "Deteksi Otonom (YOLOv11)",
+        "desc": "Model berbasis YOLOv11 terbaru kami memindai setiap piksel untuk kluster bakteri dengan presisi ekstrim. Ini memberikan Skor Kepercayaan untuk memastikan integritas data—jika skor di bawah ambang batas, tinjauan manual direkomendasikan."
+      },
+      "verification": {
+        "title": "Verifikasi & Pengarsipan",
+        "desc": "Setelah AI selesai, Anda memiliki keputusan akhir. Anda dapat menyesuaikan hitungan secara manual jika diperlukan sebelum menyelesaikannya. Setelah selesai, laporan PDF profesional dihasilkan, dan data diarsipkan dalam riwayat Anda untuk pelacakan jangka panjang."
+      }
+    },
+    "header": {
+      "title": "Penerimaan Cawan",
+      "subtitle": "Inisialisasi protokol analisis sampel baru."
+    },
+    "upload": {
+      "title": "Unggah Gambar Cawan",
+      "desc": "Tarik dan letakkan file JPG atau PNG resolusi tinggi di sini, atau klik untuk menelusuri",
+      "change": "Ubah File",
+      "select": "Pilih File",
+      "no_file": "Tidak ada file yang dipilih. Format yang didukung: .jpg, .png (Maks 25MB)"
+    },
+    "form": {
+      "title": "Pengaturan Analisis",
+      "sample_id": "ID Sampel",
+      "media_type": "Jenis Media",
+      "volume": "Volume Plated (mL)",
+      "dilution": "Faktor Pengenceran",
+      "info": "Pastikan pencahayaan merata di seluruh permukaan cawan sebelum melanjutkan. Kepercayaan AI membutuhkan definisi tepi yang jelas.",
+      "media_types": {
+        "tsa": "Tryptic Soy Agar (TSA)",
+        "macconkey": "MacConkey Agar",
+        "blood": "Blood Agar",
+        "sda": "Sabouraud Dextrose Agar"
+      },
+      "save_draft": "Simpan Draf",
+      "proceed": "Lanjutkan ke Analisis AI",
+      "processing": "Memproses..."
+    },
+    "ai": {
+      "title": "Pemindaian optik resolusi tinggi selesai.",
+      "desc": "AI telah melapisi morfologi koloni yang terdeteksi dengan pemetaan kepercayaan.",
+      "zoom": "Perbesar",
+      "filters": "Filter",
+      "legend": {
+        "circular": "Melingkar",
+        "irregular": "Tidak Beraturan"
+      },
+      "stat_label": "Jumlah Total Koloni",
+      "confidence_badge": "Kepercayaan {{val}}%",
+      "count_desc": "Jumlah mentah diturunkan dari algoritma pemindaian utama v2.4.",
+      "calculations": "Perhitungan",
+      "calculated_conc": "Konsentrasi Terhitung",
+      "species_id": "Identifikasi Spesies",
+      "refine": "Sempurnakan",
+      "verify": "Verifikasi Hasil",
+      "finalizing": "Menyelesaikan..."
+    },
+    "confirm": {
+      "title": "Konfirmasi Analisis",
+      "desc": "Tinjau metadata yang diekstrak dan jumlah koloni akhir sebelum memasukkan catatan ke arsip permanen.",
+      "hero": {
+        "sample_id": "ID Sampel",
+        "total_colonies": "Total Koloni",
+        "concentration": "Konsentrasi"
+      },
+      "metadata": {
+        "title": "Metadata Eksperimen",
+        "protocol": "Protokol",
+        "notes_label": "Catatan / Observasi"
+      },
+      "actions": {
+        "title": "Tindakan Akhir",
+        "save": "Selesaikan & Simpan ke Arsip",
+        "pdf": "Unduh Laporan PDF",
+        "edit": "Edit Parameter"
+      },
+      "validation": {
+        "title": "Validasi Lulus",
+        "desc": "Semua parameter berada dalam rentang yang dapat diterima untuk Protokol v2.1. Kepercayaan AI tinggi."
+      },
+      "species_summary": "Ringkasan Distribusi Spesies",
+      "table": {
+        "species": "Spesies",
+        "count": "Jumlah",
+        "percent": "Persentase"
+      }
+    },
+    "messages": {
+      "upload_required": "Silakan unggah gambar pelat terlebih dahulu.",
+      "process_error": "Gagal memproses analisis. Silakan coba lagi.",
+      "finalize_success": "Sampel berhasil diselesaikan dan diarsipkan.",
+      "finalize_error": "Gagal menyelesaikan sampel. Silakan coba lagi."
+    }
+  },
+  "analysis_detail": {
+    "subtitle": "Detail Analisis Sampel & Verifikasi",
+    "status": {
+      "verified": "Terverifikasi",
+      "status_verified": "Terverifikasi",
+      "loading": "Memuat...",
+      "pending": "Menunggu Tinjauan",
+      "finalized": "Catatan Selesai"
+    },
+    "actions": {
+      "save_draft": "Simpan Draf",
+      "finalize": "Selesaikan Laporan",
+      "delete": "Hapus",
+      "finalizing": "Menyelesaikan...",
+      "pan": "Geser",
+      "add_marker": "Tambah Penanda",
+      "remove_marker": "Hapus Penanda"
+    },
+    "canvas": {
+      "heatmap": "Peta Panas",
+      "zoom": "Perbesar",
+      "contrast": "Kontras",
+      "total_count": "Total Hitungan"
+    },
+    "colonies": {
+      "title": "Koloni Terdeteksi",
+      "confidence_label": "Kepercayaan",
+      "top_conf": "5 besar keyakinan",
+      "manual_short": "M",
+      "default_label": "Koloni {{index}}",
+      "fallback_cluster": "Kluster Koloni Alpha"
+    },
+    "audit": {
+      "title": "Audit Trail",
+      "system": "Sistem",
+      "ai_complete": "Deteksi AI Selesai",
+      "auto_run": "Jalan Otomatis"
+    },
+    "messages": {
+      "finalize_confirm": "Menyelesaikan akan mengunci catatan ini dan menghasilkan laporan resmi. Lanjutkan?",
+      "finalize_success": "Analisis berhasil diselesaikan.",
+      "finalize_error": "Gagal menyelesaikan analisis.",
+      "delete_confirm": "Apakah Anda yakin ingin menghapus analisis ini? Tindakan ini tidak dapat dibatalkan.",
+      "delete_success": "Analisis berhasil dihapus.",
+      "delete_error": "Gagal menghapus analisis."
+    },
+    "canvas_opts": {
+      "auto": "Otomatis"
+    }
+  },
+  "battle_mode": {
+    "title": "Pertarungan Manual vs AI",
+    "subtitle": "Uji kecepatan penghitungan Anda melawan mesin PlateSense.",
+    "view": {
+      "split": "Tampilan Terpisah",
+      "overlay": "Hamparan"
+    },
+    "library": "Perpustakaan",
+    "upload": "Unggah",
+    "select_sample": "Pilih Pelat Sampel",
+    "uploading": "Mengunggah...",
+    "upload_btn": "Unggah Pelat",
+    "ready_title": "Siap untuk Bertarung?",
+    "ready_desc": "Tantang keterampilan penghitungan manual Anda melawan AI PlateSense. Pilih pelat dari perpustakaan di atas untuk memulai simulasi.",
+    "start_btn": "Mulai Mode Pertarungan",
+    "preparing": "Menyiapkan...",
+    "selected": "Terpilih",
+    "human": {
+      "title": "Peneliti Manusia",
+      "count_label": "Hitungan Koloni",
+      "finish": "Selesai Menghitung"
+    },
+    "ai": {
+      "title": "AI PlateSense",
+      "waiting": "Menunggu Manusia",
+      "completed": "Selesai",
+      "thinking": "AI Sedang Berpikir...",
+      "thinking_desc": "AI PlateSense sedang melakukan inferensi waktu nyata pada sampel.",
+      "locked_title": "Hasil AI Terkunci",
+      "locked_desc": "Selesaikan hitungan manual Anda untuk mengungkapkan deteksi AI dan metrik perbandingan."
+    },
+    "metrics": {
+      "title": "Perbandingan Pertarungan",
+      "subtitle": "Presisi laboratorium vs kecepatan inferensi AI",
+      "ai_time": "Waktu Pemrosesan AI",
+      "accuracy": "Akurasi Manusia",
+      "efficiency": "Peningkatan Efisiensi",
+      "try_again": "Coba Pelat Lain"
+    }
+  },
+  "quick_view": {
+    "fetching": "Mengambil Detail Analisis...",
+    "summary": "Ringkasan Analisis Terperinci",
+    "colony_count": "Jumlah Koloni",
+    "concentration": "Konsentrasi",
+    "archived_params": "Parameter Terarsip",
+    "operator": "Operator",
+    "archived_at": "Diarsipkan Pada",
+    "dilution": "Pengenceran",
+    "volume": "Volume",
+    "species_identified": "Spesies Teridentifikasi",
+    "no_colonies": "Tidak ada koloni teridentifikasi.",
+    "archivist_notes": "Catatan Pengarsip",
+    "close": "Tutup Tampilan",
+    "verify_finalize": "Verifikasi & Selesaikan",
+    "error": "Gagal memuat data.",
+    "system": "Sistem",
+    "unknown": "Tidak Diketahui"
+  }
+}

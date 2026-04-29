@@ -1,0 +1,676 @@
+{
+  "nav": {
+    "dashboard": "Dashboard",
+    "new_analysis": "New Analysis",
+    "history": "History",
+    "simulator": "Simulator",
+    "settings": "Settings",
+    "en_id": "EN/ID",
+    "logout": "Logout"
+  },
+  "common": {
+    "save": "Save",
+    "cancel": "Cancel",
+    "delete": "Delete",
+    "edit": "Edit",
+    "loading": "Loading...",
+    "generating": "Generating...",
+    "search": "Search",
+    "selected": "Selected"
+  },
+  "settings": {
+    "title": "Configuration",
+    "subtitle": "Manage your personal profile, set laboratory defaults, and configure application preferences.",
+    "profile": {
+      "title": "Researcher Profile",
+      "subtitle": "Manage your laboratory identity and credentials.",
+      "name": "Full Name",
+      "email": "Registered Email Address",
+      "lab": "Organization / Laboratory Name",
+      "save": "Save Changes",
+      "saving": "Synchronizing...",
+      "saved": "Profile Successfully Updated",
+      "change_photo": "Change Photo",
+      "full_name": "Full Name",
+      "name_placeholder": "e.g. Dr. Jane Doe",
+      "lab_placeholder": "e.g. BioCore Labs"
+    },
+    "defaults": {
+      "title": "AI Recognition Library",
+      "subtitle": "Bacterial species supported by current YOLO model v11",
+      "model_info": "YOLOv11 Laboratory Core",
+      "classes": "24 Pathogenic Species Detected",
+      "agar": "Optimized Media Types",
+      "ready": "Ready",
+      "additional_classes": "+ 9 additional identification classes",
+      "lab_config_title": "Laboratory Configuration",
+      "lab_config_subtitle": "Set default analysis parameters for your workflow.",
+      "volume_label": "Default Plating Volume (ml)",
+      "dilution_label": "Default Dilution Factor (10^n)",
+      "save_btn": "Save Lab Defaults"
+    },
+    "messages": {
+      "profile_success": "Researcher profile synchronized successfully.",
+      "profile_error": "Failed to update profile. Please try again.",
+      "settings_success": "System preferences updated.",
+      "settings_error": "Failed to update preferences.",
+      "avatar_success": "Laboratory avatar updated.",
+      "avatar_error": "Failed to upload avatar.",
+      "export_success": "Audit log export initiated.",
+      "export_error": "Failed to export audit log."
+    },
+    "appearance": {
+      "title": "Aesthetics",
+      "theme_title": "Visual Theme",
+      "theme_desc": "Select the application's visual density.",
+      "light": "Light Mode",
+      "dark": "Dark Mode",
+      "lang_title": "System Language",
+      "lang_desc": "Choose your preferred primary localization.",
+      "interface_customization": "Interface Customization"
+    },
+    "storage": {
+      "title": "Data Integrity & Compliance",
+      "health": "System Health",
+      "integrity": "Integrity Score",
+      "audit_status": "Audit Status",
+      "current": "Current",
+      "validation_progress": "Data Validation Progress",
+      "archived_desc": "High-confidence records archived",
+      "export_audit_title": "Export Full Audit Trail",
+      "export_audit_desc": "Download a complete cryptographic history of all laboratory events and count modifications.",
+      "exporting": "Exporting...",
+      "download_csv": "Download CSV"
+    },
+    "footer": "© 2026 DeepMind Laboratory Systems. All rights reserved."
+  },
+  "auth": {
+    "login": {
+      "title": "PlateSense",
+      "subtitle": "Secure access to your analytical environment.",
+      "success_reg": "Account created successfully! Please log in.",
+      "email": "Email Address",
+      "password": "Password",
+      "remember": "Remember Me",
+      "forgot": "Forgot Password?",
+      "submit": "Login",
+      "submitting": "Signing in...",
+      "or": "or",
+      "google": "Continue with Google",
+      "no_account": "Don't have an account?",
+      "register_link": "Register",
+      "google_error": "Google OAuth is not available.",
+      "errors": {
+        "bad_credentials": "Invalid email or password. Please try again.",
+        "user_not_verified": "Please verify your email before logging in.",
+        "generic": "Login failed. Please check your credentials."
+      }
+    },
+    "register": {
+      "title": "Establish Archive",
+      "subtitle": "Create your researcher profile to begin analysis.",
+      "full_name": "Full Name",
+      "lab_name": "Laboratory / Institution",
+      "email": "Email Address",
+      "password": "Password",
+      "submit": "Initialize Account",
+      "submitting": "Creating account...",
+      "google": "Register with Google",
+      "has_account": "Already have an account?",
+      "login_link": "Log In",
+      "password_mismatch": "Passwords do not match.",
+      "password_length": "Password must be at least 8 characters.",
+      "errors": {
+        "user_already_exists": "An account with this email already exists.",
+        "invalid_password": "Password does not meet the required criteria.",
+        "generic": "Registration failed. Please try again."
+      }
+    },
+    "forgot": {
+      "title": "Reset Password",
+      "subtitle": "Enter your email to receive a password reset link.",
+      "submit": "Send Reset Link",
+      "success_msg": "If an account exists with this email, you will receive reset instructions shortly.",
+      "invalid_email": "Please enter a valid email address.",
+      "back_login": "Back to Login"
+    },
+    "reset": {
+      "title": "New Password",
+      "subtitle": "Please enter your new password below.",
+      "submit": "Update Password",
+      "success_msg": "Password reset successful. Redirecting to login...",
+      "back_login": "Back to Login",
+      "new_password": "New Password",
+      "confirm_password": "Confirm New Password",
+      "mismatch": "Passwords do not match.",
+      "invalid_token": "Invalid or missing token.",
+      "error": "Failed to reset password. The link may have expired."
+    },
+    "verify": {
+      "bad_token": "Invalid or expired verification link."
+    },
+    "oauth": {
+      "completing": "Completing authentication..."
+    },
+    "panel": {
+      "login_hero_title1": "Establishing the",
+      "login_hero_title2": "Definitive Truth",
+      "login_hero_title3": "in Microbiology.",
+      "register_hero_title1": "Start Your Journey",
+      "register_hero_title2": "to",
+      "register_hero_title3": "Perfect Precision.",
+      "join_researchers": "Join 2,400+ researchers",
+      "trusted_by": "Trusted by global laboratories",
+      "feature_ai_title": "AI Colony Analysis",
+      "feature_ai_desc": "Precision counting for varied microbiological media.",
+      "feature_battle_title": "Battle Mode Simulator",
+      "feature_battle_desc": "Interactive training to validate analyst expertise.",
+      "feature_lab_title": "Centralized Lab Hub",
+      "feature_lab_desc": "Secure history and collaborative organization management."
+    }
+  },
+  "landing": {
+    "nav": {
+      "features": "Features",
+      "solutions": "Solutions",
+      "methodology": "Methodology",
+      "support": "Support",
+      "login": "Log In",
+      "demo": "Book a Demo"
+    },
+    "hero": {
+      "tag": "Tactile Archive Edition v2.4",
+      "title": "The Future of Microbial Analysis",
+      "subtitle": "Replace subjective manual counting with deterministic AI precision. PlateSense delivers immutable, audit-ready microbiological data in milliseconds, not hours.",
+      "cta_deploy": "Deploy PlateSense",
+      "cta_whitepaper": "Read the Whitepaper",
+      "scan_complete": "SCAN COMPLETE",
+      "confidence": "Confidence"
+    },
+    "features": {
+      "title": "Intelligent Microbiology Platform",
+      "subtitle": "PlateSense combines high-precision AI counting with interactive laboratory simulation, delivering a complete ecosystem for modern microbiological analysis.",
+      "accuracy_title": "99.4% AI Accuracy",
+      "accuracy_desc": "Our proprietary vision models are trained on millions of annotated plates, detecting subtle morphologies that escape the human eye.",
+      "accuracy_chip": "ISO 11133 Validated",
+      "speed_title": "Instant Deterministic Results",
+      "speed_desc": "Transform a tedious manual process into a real-time data stream. What takes an analyst hours to count and document is processed instantly.",
+      "speed_manual": "Manual Processing",
+      "speed_manual_val": "~4.5 hrs/batch",
+      "speed_ai": "PlateSense AI",
+      "speed_ai_val": "< 0.8s /plate",
+      "battle_mode_title": "Interactive Training Simulator",
+      "battle_mode_desc": "Sharpen your skills with our Battle Mode simulator. Compete against the AI in real-time colony counting to validate your expertise and improve accuracy.",
+      "human_loop_title": "Human-in-the-Loop",
+      "human_loop_desc": "Flagged anomalous plates are automatically routed to senior microbiologists for final review before archival.",
+      "explainable_title": "Explainable AI",
+      "explainable_desc": "Visual heatmaps overlay every scan, demonstrating exactly which morphological features triggered the classification."
+    },
+    "workflow": {
+      "title": "Precision Workflow",
+      "subtitle": "Streamlined microbiological analysis in three simple steps.",
+      "step1_title": "Setup & Upload",
+      "step1_desc": "Define media parameters and upload high-resolution petri dish imagery to the secure analysis cloud.",
+      "step2_title": "AI Autonomous Inference",
+      "step2_desc": "State-of-the-art vision models detect, count, and classify colonies with sub-millisecond precision.",
+      "step3_title": "Verify & Report",
+      "step3_desc": "Review explainable AI results, manually validate anomalies, and generate immutable analytical reports."
+    },
+    "testimonial": {
+      "quote": "\"Implementing PlateSense didn't just speed up our workflow; it fundamentally shifted how we view data integrity. The ambient anxiety of manual counting errors is gone. We are now managing an archive of definitive truth.\"",
+      "author": "Dr. Sarah Jenkins",
+      "role": "Principal Investigator, Nexus Biologics"
+    },
+    "cta": {
+      "title": "Upgrade your lab's precision today.",
+      "subtitle": "Join leading research institutions using PlateSense to establish a new standard of microbiological truth.",
+      "get_started": "Get Started",
+      "contact": "Contact Technical Sales",
+      "footer": "No credit card required for initial consultation."
+    },
+    "footer": {
+      "copyright": "© 2024 PlateSense Technologies. The Tactile Archive Edition.",
+      "privacy": "Privacy Policy",
+      "terms": "Terms of Service",
+      "iso": "ISO Certification",
+      "support": "Contact Lab Support"
+    }
+  },
+  "history": {
+    "title": "Analysis History",
+    "subtitle": "Generate and export summary reports, tracking laboratory throughput and AI detection accuracy over time.",
+    "download_pdf": "Download PDF",
+    "throughput": {
+      "title": "Weekly Throughput",
+      "plates": "Plates Analyzed",
+      "vs_last_week": "vs last week"
+    },
+    "confidence": {
+      "title": "Avg. AI Confidence",
+      "score": "Score",
+      "accuracy_gain": "accuracy gain"
+    },
+    "anomalies": {
+      "title": "Anomalies Flagged",
+      "plates": "Plates",
+      "requires_review": "requires review"
+    },
+    "data_grid": {
+      "search_placeholder": "Search history...",
+      "export_csv": "Export CSV",
+      "col_date": "Date",
+      "col_user": "User/Technician",
+      "col_plates": "Plates Processed",
+      "col_avg_cfu": "Avg. CFU",
+      "col_status": "Status",
+      "col_sample_id": "Sample ID",
+      "col_media_type": "Media Type",
+      "col_count": "Colony Count",
+      "col_cfu": "CFU/ml",
+      "col_action": "Action",
+      "status_verified": "Verified",
+      "status_pending": "Pending OCR",
+      "status_failed": "Failed",
+      "action_view": "View Details",
+      "date_range": "Date Range",
+      "advanced_filters": "Advanced Filters",
+      "no_matching": "No matching reports found.",
+      "no_reports": "No verified analyses yet.",
+      "pagination_info": "Showing {{start}} to {{end}} of {{total}} entries",
+      "unknown": "Unknown",
+      "finalized_short": "Finalized",
+      "pending_short": "Pending",
+      "delete_title": "Delete Analysis"
+    },
+    "admin": {
+      "title": "Team History",
+      "subtitle": "Select a user to view their analysis history.",
+      "view_history": "View History",
+      "back_to_users": "Back to Users",
+      "user_history_title": "{{name}}'s History",
+      "user_history_desc": "Viewing analysis history for {{name}}."
+    },
+    "filters": {
+      "all_statuses": "All Statuses",
+      "finalized": "Finalized",
+      "pending_review": "Pending Review",
+      "draft": "Draft",
+      "additional_opts": "Additional filtering options will appear here."
+    },
+    "messages": {
+      "confirm_delete": "Are you sure you want to delete analysis for sample {{sampleId}}? This action cannot be undone.",
+      "delete_success": "Sample {{sampleId}} deleted successfully.",
+      "delete_error": "Failed to delete sample {{sampleId}}."
+    }
+  },
+  "dashboard": {
+    "welcome": "Welcome back",
+    "subtitle": "Here is an overview of your laboratory's plate counting activity.",
+    "new_analysis": "New Analysis",
+    "system_status": "System Status",
+    "optimal": "Optimal",
+    "stats": {
+      "total_processed": "Total Processed",
+      "avg_confidence": "Avg Confidence",
+      "anomalies": "Anomalies",
+      "unverified": "Unverified"
+    },
+    "recent_activity": {
+      "title": "Recent Activity",
+      "view_all": "View All"
+    },
+    "action_required": {
+      "title": "Action Required"
+    },
+    "workspace_overview": "Workspace Overview",
+    "peak_volume": "Peak Volume",
+    "confidence_label": "CONFIDENCE",
+    "last_cal": "Last cal",
+    "recalibrate": "Re-calibrate",
+    "researcher": "Researcher",
+    "time": {
+      "morning": "Morning",
+      "afternoon": "Afternoon",
+      "evening": "Evening",
+      "just_now": "Just now",
+      "mins_ago": "{{count}}m ago",
+      "hours_ago": "{{count}}h ago",
+      "days_ago": "{{count}}d ago"
+    },
+    "ai_analyzer": "Auto-Analyzer",
+    "batch_scan_finished": "finished batch scan",
+    "cfu_trend": "Avg. CFU/ml Trend",
+    "analyses_per_day": "Analyses per Day",
+    "this_week": "This Week",
+    "trends": {
+      "team": "Team Contamination Trend",
+      "user": "{{name}}'s Contamination Trend",
+      "weekly": "Weekly Contamination Trend",
+      "subtitle": "Average CFU/ml concentration per day",
+      "avg_label": "Avg Concentration"
+    },
+    "activity": {
+      "live": "Live",
+      "none": "No recent activity found."
+    },
+    "species": {
+      "title": "Top Species Found",
+      "detected": "Detected",
+      "none": "No species data available yet."
+    },
+    "samples": {
+      "team_users": "Team Users",
+      "user_recent": "{{name}}'s Recent Samples",
+      "recent": "Recently Analyzed Samples",
+      "view_history": "View History",
+      "finalized": "Finalized",
+      "pending": "Pending"
+    },
+    "admin": {
+      "volume_title": "Global Analysis Volume",
+      "finalized_label": "Analyses Finalized",
+      "audit_integrity": "Audit Integrity",
+      "verified": "Verified",
+      "workforce_title": "Global Workforce",
+      "total_users": "Total Users",
+      "researchers": "Researchers",
+      "admins": "Admins",
+      "manage_users": "Manage Users",
+      "reach_title": "Organization Reach",
+      "active_orgs": "Active Licensed Organizations",
+      "system_status": "System Status",
+      "optimal": "Optimal",
+      "network_load": "Network Load",
+      "stable": "Stable"
+    },
+    "researcher": {
+      "total_plates": "Total Plates Today",
+      "plates_unit": "Plates",
+      "verification_progress": "Verification Progress",
+      "start_verification": "Start Verification",
+      "new_analysis": "New Analysis"
+    }
+  },
+  "panel": {
+      "title": "Admin",
+      "console": "Console",
+      "subtitle": "Advanced laboratory administration and user orchestration. Monitor global system health and manage access controls with precision.",
+      "platform_core": "Platform Core",
+      "health": "System Health",
+      "optimal": "OPTIMAL",
+      "stats": {
+        "total_users": "Total Users",
+        "researchers": "Researchers",
+        "admins": "Admins",
+        "analyses": "Analyses",
+        "finalized": "Finalized",
+        "organizations": "Organizations"
+      },
+      "directory": {
+        "title": "User Directory",
+        "active_ids": "Global Identifiers Active",
+        "search_placeholder": "Search name, email or ID...",
+        "all_roles": "All Functional Roles",
+        "researchers": "Researchers",
+        "administrators": "Administrators",
+        "syncing": "Syncing directory...",
+        "col_user": "Identified User",
+        "col_group": "Access Group",
+        "col_privilege": "Privilege Level",
+        "col_verification": "Verification",
+        "col_actions": "Action Hub",
+        "individual": "Individual",
+        "joined": "Joined",
+        "authenticated": "Authenticated",
+        "revoked": "Revoked",
+        "revoke_admin": "Revoke Admin Rights",
+        "grant_admin": "Grant Admin Privileges",
+        "deactivate": "Deactivate Account",
+        "activate": "Activate Account",
+        "no_results": "No results found",
+        "no_results_desc": "Adjust your search or filter to find specific laboratory members."
+      },
+      "pagination": {
+        "viewing_index": "Viewing Index",
+        "of": "of",
+        "master_pages": "Master Pages",
+        "prev": "Previous",
+        "next": "Next"
+      },
+      "footer": "© 2026 DeepMind Laboratory Systems. All rights reserved."
+    },
+  "new_analysis": {
+    "steps": {
+      "upload": "Upload & Setup",
+      "ai": "AI Result",
+      "report": "Confirm & Report"
+    },
+    "guidebook": {
+      "title": "Analysis Guidebook",
+      "subtitle": "Learn how to use the PlateSense platform",
+      "how_to": "How to Use",
+      "got_it": "Got it, let's analyze!",
+      "overview": {
+        "title": "Overview",
+        "desc": "PlateSense utilizes state-of-the-art computer vision to automate the counting of bacterial colonies. This workflow is divided into three distinct stages designed to ensure scientific accuracy and auditability."
+      },
+      "setup": {
+        "title": "Configuration & Parameters",
+        "media_title": "Microbiological Media Profiles",
+        "media_subtitle": "Detection System Configuration",
+        "tsa_desc": "General-purpose media supporting a wide range of aerobic bacteria and fungi.",
+        "macconkey_desc": "Selective and differential media used to isolate Gram-negative enteric bacteria.",
+        "blood_desc": "Enriched media used to grow fastidious organisms and detect hemolytic activity.",
+        "sda_desc": "Selective for fungi (yeasts and molds) due to its low pH and high glucose concentration.",
+        "volume_title": "Volume Plated",
+        "volume_desc": "The exact amount of liquid sample spread on the agar surface. Standard protocols use 0.1 mL for spread plates or 1.0 mL for pour plates.",
+        "dilution_title": "Dilution Factor",
+        "dilution_desc": "The negative exponent of your serial dilution. -4 represents a 1:10,000 dilution, used to backtrack to the original sample density."
+      },
+      "ai": {
+        "title": "AI Inference Engine",
+        "autonomous_title": "Autonomous Detection (YOLOv11)",
+        "desc": "Our latest YOLOv11-based model scans every pixel for bacterial clusters with extreme precision. It provides a Confidence Score to ensure data integrity—if the score is below threshold, manual review is recommended."
+      },
+      "verification": {
+        "title": "Verification & Archiving",
+        "desc": "Once the AI finishes, you have the final say. You can manually adjust counts if needed before finalizing. Once finalized, a professional PDF report is generated, and the data is archived in your history for long-term tracking."
+      }
+    },
+    "header": {
+      "title": "Plate Ingestion",
+      "subtitle": "Initialize a new sample analysis protocol."
+    },
+    "upload": {
+      "title": "Upload Plate Image",
+      "desc": "Drag and drop high-resolution JPG or PNG files here, or click to browse",
+      "change": "Change File",
+      "select": "Select File",
+      "no_file": "No file selected. Supported formats: .jpg, .png (Max 25MB)"
+    },
+    "form": {
+      "title": "Analysis Setup",
+      "sample_id": "Sample ID",
+      "media_type": "Media Type",
+      "volume": "Volume Plated (mL)",
+      "dilution": "Dilution Factor",
+      "info": "Ensure lighting is even across the plate surface before proceeding. AI confidence requires clear edge definition.",
+      "media_types": {
+        "tsa": "Tryptic Soy Agar (TSA)",
+        "macconkey": "MacConkey Agar",
+        "blood": "Blood Agar",
+        "sda": "Sabouraud Dextrose Agar"
+      },
+      "save_draft": "Save Draft",
+      "proceed": "Proceed to AI Analysis",
+      "processing": "Processing..."
+    },
+    "ai": {
+      "title": "High-resolution optical scan complete.",
+      "desc": "AI has overlaid detected colony morphologies with confidence mapping.",
+      "zoom": "Zoom",
+      "filters": "Filters",
+      "legend": {
+        "circular": "Circular",
+        "irregular": "Irregular"
+      },
+      "stat_label": "Total Colony Count",
+      "confidence_badge": "{{val}}% Confidence",
+      "count_desc": "Raw count derived from primary scanning algorithm v2.4.",
+      "calculations": "Calculations",
+      "calculated_conc": "Calculated Conc.",
+      "species_id": "Species Identification",
+      "refine": "Refine",
+      "verify": "Verify Results",
+      "finalizing": "Finalizing..."
+    },
+    "confirm": {
+      "title": "Analysis Confirmation",
+      "desc": "Review the extracted metadata and final colony counts before committing the record to the permanent archive.",
+      "hero": {
+        "sample_id": "Sample ID",
+        "total_colonies": "Total Colonies",
+        "concentration": "Concentration"
+      },
+      "metadata": {
+        "title": "Experiment Metadata",
+        "protocol": "Protocol",
+        "date": "Analysis Date",
+        "operator": "Operator",
+        "timestamp": "Last Updated",
+        "notes_label": "Notes / Observations"
+      },
+      "actions": {
+        "title": "Final Actions",
+        "save": "Finalize & Save to Archive",
+        "pdf": "Download PDF Report",
+        "edit": "Edit Parameters"
+      },
+      "validation": {
+        "title": "Validation Passed",
+        "desc": "All parameters are within acceptable ranges for Protocol v2.1. AI confidence is high."
+      },
+      "species_summary": "Species Distribution Summary",
+      "table": {
+        "species": "Species",
+        "count": "Count",
+        "percent": "Percentage"
+      }
+    },
+    "messages": {
+      "upload_required": "Please upload a plate image first.",
+      "process_error": "Failed to process analysis. Please try again.",
+      "finalize_success": "Sample finalized and archived successfully.",
+      "finalize_error": "Failed to finalize sample. Please try again."
+    }
+  },
+  "analysis_detail": {
+    "subtitle": "Sample Analysis Details & Verification",
+    "status": {
+      "verified": "Verified",
+      "status_verified": "Verified",
+      "loading": "Loading...",
+      "pending": "Pending Review",
+      "finalized": "Record Finalized"
+    },
+    "actions": {
+      "save_draft": "Save Draft",
+      "finalize": "Finalize Report",
+      "delete": "Delete",
+      "finalizing": "Finalizing...",
+      "pan": "Pan",
+      "add_marker": "Add Marker",
+      "remove_marker": "Remove Marker"
+    },
+    "canvas": {
+      "heatmap": "Heatmap",
+      "zoom": "Zoom",
+      "contrast": "Contrast",
+      "total_count": "Total Count"
+    },
+    "colonies": {
+      "title": "Detected Colonies",
+      "confidence_label": "Confidence",
+      "top_conf": "Top 5 conf.",
+      "manual_short": "M",
+      "default_label": "Colony {{index}}",
+      "fallback_cluster": "Colony Cluster Alpha"
+    },
+    "audit": {
+      "title": "Audit Trail",
+      "system": "System",
+      "ai_complete": "AI Detection Complete",
+      "auto_run": "Auto-Run"
+    },
+    "messages": {
+      "finalize_confirm": "Finalizing will lock this record and generate the official report. Continue?",
+      "finalize_success": "Analysis finalized successfully.",
+      "finalize_error": "Failed to finalize analysis.",
+      "delete_confirm": "Are you sure you want to delete this analysis? This cannot be undone.",
+      "delete_success": "Analysis deleted successfully.",
+      "delete_error": "Failed to delete analysis."
+    },
+    "canvas_opts": {
+      "auto": "Auto"
+    }
+  },
+  "battle_mode": {
+    "title": "Manual vs AI Battle",
+    "subtitle": "Test your counting speed against the PlateSense engine.",
+    "view": {
+      "split": "Split View",
+      "overlay": "Overlay"
+    },
+    "library": "Library",
+    "upload": "Upload",
+    "select_sample": "Select Sample Plate",
+    "uploading": "Uploading...",
+    "upload_btn": "Upload Plate",
+    "ready_title": "Ready for the Battle?",
+    "ready_desc": "Challenge your manual counting skills against the PlateSense AI. Select a plate from the library above to begin the simulation.",
+    "start_btn": "Start Battle Mode",
+    "preparing": "Preparing...",
+    "selected": "Selected",
+    "human": {
+      "title": "Human Researcher",
+      "count_label": "Colony Count",
+      "finish": "Finish Counting"
+    },
+    "ai": {
+      "title": "PlateSense AI",
+      "waiting": "Waiting for Human",
+      "completed": "Completed",
+      "thinking": "AI is Thinking...",
+      "thinking_desc": "PlateSense AI is performing real-time inference on the sample.",
+      "locked_title": "AI Results Locked",
+      "locked_desc": "Finish your manual count to reveal the AI's detection and comparison metrics."
+    },
+    "metrics": {
+      "title": "Battle Comparison",
+      "subtitle": "Laboratory precision vs AI inference speed",
+      "ai_time": "AI Processing Time",
+      "accuracy": "Human Accuracy",
+      "efficiency": "Efficiency Gain",
+      "try_again": "Try Another Plate"
+    }
+  },
+  "quick_view": {
+    "fetching": "Fetching Analysis Details...",
+    "summary": "Detailed Analysis Summary",
+    "colony_count": "Colony Count",
+    "concentration": "Concentration",
+    "archived_params": "Archived Parameters",
+    "operator": "Operator",
+    "archived_at": "Archived At",
+    "dilution": "Dilution",
+    "volume": "Volume",
+    "species_identified": "Species Identified",
+    "no_colonies": "No colonies identified.",
+    "archivist_notes": "Archivist Notes",
+    "close": "Close View",
+    "verify_finalize": "Verify & Finalize",
+    "error": "Failed to load data.",
+    "system": "System",
+    "unknown": "Unknown"
+  }
+}
