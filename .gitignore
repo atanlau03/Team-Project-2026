@@ -4,7 +4,7 @@ dist/
 venv/
 *.log
 .DS_Store
+.vite/
 apps/web/dist/
 apps/api/__pycache__/
 apps/api/venv/
-apps/api/uploads/
