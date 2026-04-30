@@ -54,5 +54,14 @@ Model Evaluation & Testing
 - Status: Completed
 
 
+-- Saturday, April 25 - Sunday, 26 April --
+- Activity: Integrate UI with pre-trained models
+- Status: Completed
+
+-- Monday, April 27 - Tuesday, April 28 --
+- Activity: Testing for each feature in our app
+- Status : Completed
+
+
 
 
