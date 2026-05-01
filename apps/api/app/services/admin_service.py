@@ -20,7 +20,7 @@ async def list_users(
     """List all users with optional search and role filter."""
     base = select(User, Organization.name.label("org_name")).outerjoin(
         Organization, User.organization_id == Organization.id
-    )
+    ).where(User.email != "admin@platesense.lab")
 
     if search:
         base = base.where(
