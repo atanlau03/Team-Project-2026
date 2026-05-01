@@ -1,6 +1,6 @@
 node_modules/
 dist/
-# .env
+.env
 venv/
 *.log
 .DS_Store
@@ -8,3 +8,4 @@ venv/
 apps/web/dist/
 apps/api/__pycache__/
 apps/api/venv/
+apps/api/uploads/

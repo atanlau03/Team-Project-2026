@@ -65,9 +65,9 @@ async def update_user_role(
     db: AsyncSession, user_id: uuid.UUID, new_role: str
 ) -> dict:
     """Change a user's role."""
-    if new_role not in ("researcher", "admin"):
+    if new_role != "researcher":
         from fastapi import HTTPException
-        raise HTTPException(400, "Invalid role. Must be 'researcher' or 'admin'.")
+        raise HTTPException(400, "Role updates are restricted. Only 'researcher' is allowed.")
 
     result = await db.execute(select(User).where(User.id == user_id))
     user = result.unique().scalar_one_or_none()
