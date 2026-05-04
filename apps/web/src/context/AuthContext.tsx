@@ -1,21 +1,19 @@
 import { createContext, useContext, useCallback, useMemo, type ReactNode } from 'react';
 import { useTranslation } from 'react-i18next';
-import { useCurrentUser, useLogin, useLogout, useRegister } from '../hooks/useAuth';
+import { useCurrentUser, useLogin, useLogout } from '../hooks/useAuth';
 import { TOKEN_KEY } from '../lib/axios';
-import type { User, RegisterRequest } from '../types';
+import type { User } from '../types';
 
 interface AuthContextValue {
   user: User | null | undefined;
   isAuthenticated: boolean;
   isAdmin: boolean;
+  isLabManager: boolean;
   isLoading: boolean;
   login: (email: string, password: string) => Promise<void>;
-  register: (data: RegisterRequest) => Promise<void>;
   logout: () => Promise<void>;
   loginError: string | null;
-  registerError: string | null;
   isLoginPending: boolean;
-  isRegisterPending: boolean;
 }
 
 const AuthContext = createContext<AuthContextValue | null>(null);
@@ -30,7 +28,6 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   } = useCurrentUser();
 
   const loginMutation = useLogin();
-  const registerMutation = useRegister();
   const logoutMutation = useLogout();
 
   const login = useCallback(
@@ -38,13 +35,6 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       await loginMutation.mutateAsync({ email, password });
     },
     [loginMutation],
-  );
-
-  const register = useCallback(
-    async (data: RegisterRequest) => {
-      await registerMutation.mutateAsync(data);
-    },
-    [registerMutation],
   );
 
   const logout = useCallback(async () => {
@@ -56,8 +46,6 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     const map: Record<string, string> = {
       'LOGIN_BAD_CREDENTIALS': t('auth.login.errors.bad_credentials'),
       'LOGIN_USER_NOT_VERIFIED': t('auth.login.errors.user_not_verified'),
-      'REGISTER_USER_ALREADY_EXISTS': t('auth.register.errors.user_already_exists'),
-      'REGISTER_INVALID_PASSWORD': t('auth.register.errors.invalid_password'),
       'RESET_PASSWORD_BAD_TOKEN': t('auth.reset.bad_token'),
       'VERIFY_USER_BAD_TOKEN': t('auth.verify.bad_token'),
     };
@@ -70,27 +58,19 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       ) || t('auth.login.errors.generic')
     : null;
 
-  const registerError = registerMutation.error
-    ? friendlyError(
-        (registerMutation.error as { response?: { data?: { detail?: string } } })?.response?.data?.detail
-      ) || t('auth.register.errors.generic')
-    : null;
-
   const value = useMemo<AuthContextValue>(
     () => ({
       user: user ?? null,
       isAuthenticated: !!user,
       isAdmin: user?.role === 'admin',
+      isLabManager: user?.role === 'lab_manager',
       isLoading: !!token && isUserLoading,
       login,
-      register,
       logout,
       loginError,
-      registerError,
       isLoginPending: loginMutation.isPending,
-      isRegisterPending: registerMutation.isPending,
     }),
-    [user, token, isUserLoading, login, register, logout, loginError, registerError, loginMutation.isPending, registerMutation.isPending, t],
+    [user, token, isUserLoading, login, logout, loginError, loginMutation.isPending],
   );
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;

@@ -25,7 +25,8 @@ export const formatDate = (dateStr?: string | null, lang: string = 'en-US') => {
 
 export default function History() {
   const { t, i18n } = useTranslation();
-  const { isAdmin } = useAuth();
+  const { isAdmin, isLabManager } = useAuth();
+  const isSupervisor = isAdmin || isLabManager;
   const { showNotification } = useNotification();
   const [search, setSearch] = useState('');
   const [selectedDate, setSelectedDate] = useState('');
@@ -36,12 +37,15 @@ export default function History() {
   const [page, setPage] = useState(1);
   const pageSize = 20;
 
-  // For Admin User Grid - Only show researchers since admins don't do analysis
-  const { data: usersData } = useAdminUsers({ page_size: 100, role: 'researcher' });
+  // For Supervisor User Grid - Lab managers only see researchers
+  const { data: usersData } = useAdminUsers({ 
+    page_size: 100, 
+    role: isLabManager ? 'researcher' : undefined 
+  });
 
-  // Fetch analyses with verified status for the reports table
+  // Fetch analyses
   const filters: any = {
-    scope: isAdmin ? 'team' : 'mine',
+    scope: isSupervisor ? 'team' : 'mine',
     target_user_id: selectedUser?.id || undefined,
     status: statusFilter || undefined,
     search: search || undefined,
@@ -70,8 +74,8 @@ export default function History() {
     }
   };
 
-  const items = analyses?.items || [];
-  const total = analyses?.total || 0;
+  const items = (analyses?.items || []).filter(a => !isSupervisor || ['finalized', 'awaiting_approval'].includes(a.status));
+  const total = items.length; // Approximate total for filtered items
   const totalPages = analyses?.total_pages || 1;
 
   const handleExportCsv = () => {
@@ -82,8 +86,6 @@ export default function History() {
   };
 
   const handleExportPdf = () => {
-    // For batch PDF, we usually generate them all or zip them. 
-    // Here we'll just trigger the batch generation.
     const analysisIds = items.map(i => i.id);
     if (analysisIds.length > 0) {
       exportBatchPdf.mutate({ analysis_ids: analysisIds });
@@ -97,14 +99,29 @@ export default function History() {
 
       {/* Main Content Area */}
       <main className="flex-1 w-full max-w-[1600px] mx-auto min-h-screen">
-        {isAdmin && !selectedUser ? (
-          // --- USER GRID VIEW (Admin Step 1) ---
+        {isSupervisor && !selectedUser ? (
+          // --- USER GRID VIEW (Supervisor Step 1) ---
           <div className="p-8 md:p-12 space-y-8">
             <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-6 mb-4">
               <div>
-                <h2 className="font-headline text-4xl font-extrabold text-on-surface tracking-tight mb-2">{t('history.admin.title')}</h2>
-                <p className="font-body text-on-surface-variant text-lg">{t('history.admin.subtitle')}</p>
+                <h2 className="font-headline text-4xl font-extrabold text-on-surface tracking-tight mb-2">
+                  {isLabManager ? "Team History" : t('history.admin.title')}
+                </h2>
+                <p className="font-body text-on-surface-variant text-lg">
+                  {isLabManager ? "Monitor and manage the analysis records of your assigned team members." : t('history.admin.subtitle')}
+                </p>
               </div>
+              
+              {isLabManager && (
+                <button
+                  onClick={handleExportCsv}
+                  disabled={items.length === 0 || exportCsv.isPending}
+                  className="bg-[#5D4037] text-white px-8 py-4 rounded-xl font-bold text-lg shadow-xl shadow-[#5D4037]/20 hover:bg-[#4E342E] transition-all flex items-center gap-3"
+                >
+                  <span className="material-symbols-outlined">download_for_offline</span>
+                  Download All Team Results
+                </button>
+              )}
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
@@ -115,11 +132,9 @@ export default function History() {
                   className="bg-surface-container-lowest rounded-2xl p-6 text-left border border-outline-variant/20 hover:bg-surface-container-low transition-colors shadow-sm group flex flex-col items-center gap-4"
                 >
                   <div className="w-20 h-20 rounded-full overflow-hidden bg-surface-container-high border-2 border-surface flex items-center justify-center shrink-0 shadow-sm group-hover:scale-105 transition-transform duration-300">
-                    {u.avatar_url ? (
-                      <img src={getMediaUrl(u.avatar_url)} alt={u.full_name} className="w-full h-full object-cover" />
-                    ) : (
-                      <span className="font-headline text-2xl font-bold text-primary">{u.full_name.charAt(0)}</span>
-                    )}
+                    <div className="w-full h-full flex items-center justify-center bg-primary text-on-primary font-headline text-2xl font-bold">
+                      {u.full_name.charAt(0)}
+                    </div>
                   </div>
                   <div className="text-center w-full">
                     <h3 className="font-headline font-bold text-lg text-on-surface truncate px-2">{u.full_name}</h3>
@@ -135,12 +150,12 @@ export default function History() {
             </div>
           </div>
         ) : (
-          // --- ANALYSIS HISTORY VIEW (User View OR Admin Step 2) ---
+          // --- ANALYSIS HISTORY VIEW (User View OR Supervisor Step 2) ---
           <div className="p-8 md:p-12 space-y-12">
             {/* Page Header & Actions */}
             <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-6">
               <div>
-                {isAdmin && selectedUser && (
+                {isSupervisor && selectedUser && (
                   <button 
                     onClick={() => { setSelectedUser(null); setPage(1); setSearch(''); }}
                     className="flex items-center gap-2 text-primary hover:text-primary-fixed mb-4 font-label text-sm uppercase tracking-wider"
@@ -150,14 +165,13 @@ export default function History() {
                   </button>
                 )}
                 <h2 className="font-headline text-4xl font-extrabold text-on-surface tracking-tight mb-2">
-                  {isAdmin && selectedUser ? t('history.admin.user_history_title', { name: selectedUser.name }) : t('history.title')}
+                  {isSupervisor && selectedUser ? t('history.admin.user_history_title', { name: selectedUser.name }) : t('history.title')}
                 </h2>
                 <p className="font-body text-on-surface-variant text-lg">
-                  {isAdmin && selectedUser ? t('history.admin.user_history_desc', { name: selectedUser.name }) : t('history.subtitle')}
+                  {isSupervisor && selectedUser ? t('history.admin.user_history_desc', { name: selectedUser.name }) : t('history.subtitle')}
                 </p>
               </div>
               <div className="flex gap-4">
-
                 <button
                   onClick={handleExportCsv}
                   disabled={exportCsv.isPending || items.length === 0}
@@ -206,8 +220,8 @@ export default function History() {
               >
                 <option value="">{t('history.filters.all_statuses')}</option>
                 <option value="finalized">{t('history.filters.finalized')}</option>
-                <option value="ai_complete">{t('history.filters.pending_review')}</option>
-                <option value="draft">{t('history.filters.draft')}</option>
+                <option value="awaiting_approval">Awaiting Approval</option>
+                {!isSupervisor && <option value="draft">{t('history.filters.draft')}</option>}
               </select>
             </div>
 
@@ -245,7 +259,7 @@ export default function History() {
                         <td className="py-4 px-6 text-on-surface font-label text-sm">{formatDate(a.created_at, i18n.language)}</td>
                         <td className="py-4 px-6 font-medium">
                           <button
-                            onClick={() => setSelectedAnalysisId(a.id)}
+                            onClick={() => window.location.href = `/analysis/${a.id}`}
                             className="text-primary hover:underline transition-all font-bold"
                           >
                             {a.sample_id}
@@ -267,14 +281,14 @@ export default function History() {
                         <td className="py-4 px-6 text-center">
                           <div className={`inline-flex items-center gap-2 px-3 py-1 rounded-full border ${a.status === 'finalized'
                             ? 'bg-primary-container/20 border-primary/20 text-primary'
-                            : a.status === 'ai_complete'
-                              ? 'bg-tertiary-container/20 border-tertiary/20 text-tertiary'
+                            : a.status === 'awaiting_approval'
+                              ? 'bg-warning/10 border-warning/20 text-warning'
                               : 'bg-surface-container-high border-outline-variant/30 text-outline'
                             }`}>
-                            <span className={`w-1.5 h-1.5 rounded-full ${a.status === 'finalized' ? 'bg-primary' : a.status === 'ai_complete' ? 'bg-tertiary' : 'bg-outline'
+                            <span className={`w-1.5 h-1.5 rounded-full ${a.status === 'finalized' ? 'bg-primary' : a.status === 'awaiting_approval' ? 'bg-warning' : 'bg-outline'
                               }`}></span>
                             <span className="text-[10px] font-bold uppercase tracking-wider">
-                              {a.status === 'finalized' ? t('history.data_grid.finalized_short') : a.status === 'ai_complete' ? t('history.data_grid.pending_short') : a.status}
+                              {a.status === 'finalized' ? 'Finalized' : a.status === 'awaiting_approval' ? 'Awaiting Approval' : 'Draft'}
                             </span>
                           </div>
                         </td>
@@ -301,19 +315,19 @@ export default function History() {
                           </div>
                         </td>
                       </tr>
-                      <tr className="bg-surface h-2">
-                        {Array.from({ length: isAdmin ? 8 : 7 }).map((_, i) => (
-                          <td key={i}></td>
-                        ))}
+                        <tr className="bg-surface h-2">
+                          {Array.from({ length: isSupervisor ? 8 : 7 }).map((_, i) => (
+                            <td key={i}></td>
+                          ))}
+                        </tr>
+                      </>
+                    )) : (
+                      <tr>
+                        <td colSpan={isSupervisor ? 8 : 7} className="py-12 text-center text-on-surface-variant font-body">
+                          {search ? t('history.data_grid.no_matching') : t('history.data_grid.no_reports')}
+                        </td>
                       </tr>
-                    </>
-                  )) : (
-                    <tr>
-                      <td colSpan={isAdmin ? 8 : 7} className="py-12 text-center text-on-surface-variant font-body">
-                        {search ? t('history.data_grid.no_matching') : t('history.data_grid.no_reports')}
-                      </td>
-                    </tr>
-                  )}
+                    )}
                 </tbody>
               </table>
             </div>

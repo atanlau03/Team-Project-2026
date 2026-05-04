@@ -1,7 +1,8 @@
 import { useState, useRef, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { useCreateAnalysis, useUploadImage, useRunAiInference, useFinalizeAnalysis } from '../hooks/useAnalyses';
+import { useCreateAnalysis, useUploadImage, useRunAiInference, useFinalizeAnalysis, useSubmitAnalysis } from '../hooks/useAnalyses';
+import { useAuth } from '../context/AuthContext';
 import { useGeneratePdf } from '../hooks/useReports';
 import type { AnalysisDetail as AnalysisDetailType } from '../types';
 import TopNav from '../components/TopNav';
@@ -72,11 +73,18 @@ export default function NewAnalysis() {
   };
 
   // Mutations
+  const { user } = useAuth();
   const createAnalysis = useCreateAnalysis();
   const uploadImage = useUploadImage();
   const runAi = useRunAiInference();
   const finalizeAnalysis = useFinalizeAnalysis();
+  const submitAnalysis = useSubmitAnalysis();
   const generatePdf = useGeneratePdf();
+
+  const isLabManager = user?.role === 'lab_manager';
+  const isAdmin = user?.role === 'admin';
+  const isResearcher = user?.role === 'researcher' || !user?.role;
+  const isSupervisor = isAdmin || isLabManager;
 
   const handleFileSelect = (file: File) => {
     setSelectedFile(file);
@@ -137,9 +145,15 @@ export default function NewAnalysis() {
     setError('');
     try {
       if (analysis.status !== 'finalized') {
-        const finalized = await finalizeAnalysis.mutateAsync(analysis.id);
-        setAnalysis(finalized);
-        showNotification(t('new_analysis.messages.finalize_success'), 'success');
+        let updated;
+        if (isResearcher) {
+          updated = await submitAnalysis.mutateAsync(analysis.id);
+          showNotification("Analysis submitted for supervisor approval", 'success');
+        } else {
+          updated = await finalizeAnalysis.mutateAsync(analysis.id);
+          showNotification(t('new_analysis.messages.finalize_success'), 'success');
+        }
+        setAnalysis(updated);
         
         // Ensure step 3 is fully "completed" in state
         setMaxStepReached(3);
@@ -352,7 +366,29 @@ export default function NewAnalysis() {
                   )}
 
                   <div className="mt-8 flex justify-end gap-4">
-                    <button className="px-6 py-3 font-headline font-semibold text-primary border border-outline-variant/15 rounded-xl hover:bg-surface-container-low transition-colors">
+                    <button 
+                      type="button"
+                      onClick={async () => {
+                        if (!analysis) {
+                          try {
+                            const currentAnalysis = await createAnalysis.mutateAsync({
+                              sample_id: sampleId,
+                              media_type: mediaType,
+                              volume_plated_ml: volume,
+                              dilution_factor: Math.round(Math.pow(10, Math.abs(dilution))),
+                            });
+                            setAnalysis(currentAnalysis);
+                            showNotification("Analysis saved as draft", "success");
+                            navigate('/history');
+                          } catch (err) {
+                            setError("Failed to save draft");
+                          }
+                        } else {
+                          navigate('/history');
+                        }
+                      }}
+                      className="px-6 py-3 font-headline font-semibold text-primary border border-outline-variant/15 rounded-xl hover:bg-surface-container-low transition-colors"
+                    >
                       {t('new_analysis.form.save_draft')}
                     </button>
                     <button
@@ -687,15 +723,25 @@ export default function NewAnalysis() {
                 {/* Action Panel */}
                 <div className="bg-surface-container-lowest rounded-xl p-6 ambient-shadow flex flex-col gap-4">
                   <h3 className="font-headline text-lg font-bold text-primary mb-2">{t('new_analysis.confirm.actions.title')}</h3>
+                  {!isSupervisor && analysis?.status !== 'awaiting_approval' && analysis?.status !== 'finalized' && (
+                    <button
+                      onClick={() => navigate('/history')}
+                      className="w-full py-4 rounded-xl border-2 border-outline-variant text-primary font-headline font-bold text-sm hover:bg-surface-container transition-all flex items-center justify-center gap-2 group"
+                    >
+                      <span className="material-symbols-outlined text-lg group-hover:rotate-12 transition-transform">drafts</span>
+                      Save as Draft
+                    </button>
+                  )}
+
                   <button 
                     onClick={handleFinalize} 
-                    disabled={finalizeAnalysis.isPending}
-                    className="btn-primary text-on-primary font-body font-semibold py-4 px-6 rounded-xl flex items-center justify-center gap-2 hover:opacity-95 transition-opacity shadow-[0_8px_16px_rgba(0,191,255,0.2)] active:scale-[0.98] disabled:opacity-70"
+                    disabled={finalizeAnalysis.isPending || submitAnalysis.isPending}
+                    className="w-full py-4 px-6 bg-primary text-on-primary font-headline font-bold rounded-xl flex items-center justify-center gap-2 hover:opacity-95 transition-opacity shadow-[0_8px_32px_rgba(81,56,37,0.15)] active:scale-[0.98] disabled:opacity-70"
                   >
                     <span className="material-symbols-outlined text-[20px]">
-                      {finalizeAnalysis.isPending ? 'sync' : 'verified'}
+                      {finalizeAnalysis.isPending || submitAnalysis.isPending ? 'sync' : 'send'}
                     </span>
-                    {finalizeAnalysis.isPending ? t('common.processing') : t('new_analysis.confirm.actions.save')}
+                    {finalizeAnalysis.isPending || submitAnalysis.isPending ? t('common.processing') : isResearcher ? 'Submit for Approval' : t('new_analysis.confirm.actions.save')}
                   </button>
 
                   <div className="mt-4 text-center">

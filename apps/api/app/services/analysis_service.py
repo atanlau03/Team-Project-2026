@@ -191,12 +191,48 @@ async def update_analysis(
     return analysis
 
 
-async def finalize_analysis(
+async def submit_for_approval(
     db: AsyncSession, analysis_id: uuid.UUID, user_id: uuid.UUID
 ) -> Analysis:
-    """Lock an analysis and set status to 'finalized'."""
+    """Submit an analysis for supervisor review."""
     analysis = await _get_analysis_or_404(db, analysis_id)
     _check_ownership(analysis, user_id)
+
+    if analysis.status == "finalized":
+        raise HTTPException(status_code=400, detail="Analysis already finalized.")
+    
+    analysis.status = "awaiting_approval"
+
+    await audit_service.log_event(
+        db,
+        analysis_id=analysis_id,
+        user_id=user_id,
+        event_type="status_changed",
+        description="Analysis submitted for supervisor approval.",
+    )
+    await db.flush()
+    await db.refresh(analysis)
+    return analysis
+
+
+async def finalize_analysis(
+    db: AsyncSession, analysis_id: uuid.UUID, requesting_user_id: uuid.UUID
+) -> Analysis:
+    """Lock an analysis and set status to 'finalized'. Allowed for owner or supervisor."""
+    analysis = await _get_analysis_or_404(db, analysis_id)
+    
+    # Check if owner OR supervisor
+    is_owner = analysis.user_id == requesting_user_id
+    is_supervisor = False
+    
+    if not is_owner:
+        owner_result = await db.execute(select(User).where(User.id == analysis.user_id))
+        owner = owner_result.scalar_one_or_none()
+        if owner and owner.supervisor_id == requesting_user_id:
+            is_supervisor = True
+            
+    if not is_owner and not is_supervisor:
+        raise HTTPException(status_code=403, detail="Not authorized to finalize this analysis.")
 
     if analysis.status == "finalized":
         raise HTTPException(status_code=400, detail="Analysis already finalized.")
@@ -207,7 +243,6 @@ async def finalize_analysis(
 
     # Recalculate CFU/ml
     if analysis.final_colony_count is not None:
-        # Handle exponent notation for dilution (e.g. -4 -> 10^4)
         actual_dilution = analysis.dilution_factor
         if actual_dilution < 0:
             actual_dilution = 10 ** abs(actual_dilution)
@@ -221,7 +256,7 @@ async def finalize_analysis(
     await audit_service.log_event(
         db,
         analysis_id=analysis_id,
-        user_id=user_id,
+        user_id=requesting_user_id,
         event_type="status_changed",
         description="Analysis finalized and locked.",
     )
@@ -247,6 +282,20 @@ async def list_analyses(
                 base_query = base_query.where(Analysis.user_id == filters.target_user_id)
             else:
                 pass  # Admin sees all analyses system-wide
+        elif role == "lab_manager":
+            # Lab manager sees their team's analyses (supervisor_id == current user)
+            from sqlalchemy import or_ as or_clause
+            team_ids = select(User.id).where(
+                or_clause(User.supervisor_id == user_id, User.id == user_id)
+            )
+            if filters.target_user_id:
+                # Security: Ensure target_user_id is actually part of the team
+                base_query = base_query.where(
+                    Analysis.user_id == filters.target_user_id,
+                    Analysis.user_id.in_(team_ids)
+                )
+            else:
+                base_query = base_query.where(Analysis.user_id.in_(team_ids))
         elif organization_id:
             base_query = base_query.where(User.organization_id == organization_id)
             if filters.target_user_id:
@@ -258,7 +307,10 @@ async def list_analyses(
 
     # ── Additional filters ───────────────────────────────
     if filters.status:
-        base_query = base_query.where(Analysis.status == filters.status)
+        if isinstance(filters.status, list):
+            base_query = base_query.where(Analysis.status.in_(filters.status))
+        else:
+            base_query = base_query.where(Analysis.status == filters.status)
     if filters.media_type:
         base_query = base_query.where(Analysis.media_type == filters.media_type)
     if filters.search:

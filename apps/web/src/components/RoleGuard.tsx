@@ -3,20 +3,20 @@ import { useAuth } from '../context/AuthContext';
 import type { ReactNode } from 'react';
 
 interface RoleGuardProps {
-  role: string;
+  roles: string[];
   children: ReactNode;
 }
 
 /**
  * Wraps a route and redirects to /dashboard if the user
- * does not have the required role.
+ * does not have one of the required roles.
  */
-export default function RoleGuard({ role, children }: RoleGuardProps) {
+export default function RoleGuard({ roles, children }: RoleGuardProps) {
   const { user, isLoading } = useAuth();
 
   if (isLoading) return null;
 
-  if (!user || user.role !== role) {
+  if (!user || !roles.includes(user.role)) {
     return <Navigate to="/dashboard" replace />;
   }
 

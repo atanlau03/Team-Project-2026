@@ -44,17 +44,36 @@ async def export_csv(db: AsyncSession, analysis_ids: List[uuid.UUID]):
     )
 
 
-async def export_audit_log(db: AsyncSession):
-    """Export the entire system audit trail to CSV."""
+async def export_audit_log(db: AsyncSession, user: "User"):
+    """Export the system audit trail to CSV with role-based filtering."""
     from app.models.audit_event import AuditEvent
     from app.models.user import User
+    from sqlalchemy import or_
     
     stmt = (
         select(AuditEvent, User.full_name, Analysis.sample_id)
         .outerjoin(User, AuditEvent.user_id == User.id)
         .outerjoin(Analysis, AuditEvent.analysis_id == Analysis.id)
-        .order_by(AuditEvent.created_at.desc())
     )
+
+    # ── Role-Based Filtering ──────────────────────────────
+    if user.role == "admin":
+        # Admins see everything
+        pass
+    elif user.role == "lab_manager":
+        # Lab Managers see their own events + events from users they supervise
+        team_stmt = select(User.id).where(User.supervisor_id == user.id)
+        stmt = stmt.where(
+            or_(
+                AuditEvent.user_id == user.id,
+                AuditEvent.user_id.in_(team_stmt)
+            )
+        )
+    else:
+        # Researchers see only their own events
+        stmt = stmt.where(AuditEvent.user_id == user.id)
+
+    stmt = stmt.order_by(AuditEvent.created_at.desc())
     result = await db.execute(stmt)
     rows = result.all()
     

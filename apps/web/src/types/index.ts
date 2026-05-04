@@ -12,17 +12,12 @@ export interface User {
   avatar_url?: string | null;
   organization_id?: string | null;
   organization_name?: string | null;
+  supervisor_id?: string | null;
+  supervisor_name?: string | null;
   role: string;
   is_active: boolean;
   is_superuser: boolean;
   is_verified: boolean;
-}
-
-export interface RegisterRequest {
-  email: string;
-  password: string;
-  full_name: string;
-  organization_name?: string;
 }
 
 export interface UserUpdateRequest {
@@ -39,6 +34,49 @@ export interface ProfileUpdateRequest {
   title?: string;
   organization_name?: string;
 }
+
+// ─── Admin ──────────────────────────────────────────────
+export interface AdminUserListItem {
+  id: string;
+  email: string;
+  full_name: string;
+  role: string;
+  organization_name?: string | null;
+  avatar_url?: string | null;
+  supervisor_id?: string | null;
+  supervisor_name?: string | null;
+  is_active: boolean;
+  created_at: string;
+}
+
+export interface PaginatedAdminUsers {
+  items: AdminUserListItem[];
+  total: number;
+  page: number;
+  page_size: number;
+  total_pages: number;
+}
+
+export interface AdminUserCreateRequest {
+  email: string;
+  full_name: string;
+  password: string;
+  role: string;
+  organization_name?: string;
+  supervisor_id?: string;
+}
+
+export interface AdminSystemStats {
+  total_users: number;
+  total_researchers: number;
+  total_lab_managers: number;
+  total_admins: number;
+  total_analyses: number;
+  total_finalized: number;
+  total_organizations: number;
+}
+
+
 
 // ─── Analysis ────────────────────────────────────────────
 export interface AnalysisCreateRequest {
@@ -120,7 +158,7 @@ export interface PaginatedAnalyses {
 export interface AnalysisFilterParams {
   scope?: 'mine' | 'team';
   target_user_id?: string;
-  status?: string;
+  status?: string | string[];
   media_type?: string;
   search?: string;
   date_from?: string;

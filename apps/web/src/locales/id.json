@@ -57,7 +57,7 @@
       "avatar_success": "Avatar laboratorium diperbarui.",
       "avatar_error": "Gagal mengunggah avatar.",
       "export_success": "Ekspor log audit dimulai.",
-      "export_error": "Gagal mengekspor log audit."
+      "export_error": "Gagal mengespor log audit."
     },
     "appearance": {
       "title": "Estetika",
@@ -103,6 +103,7 @@
       "errors": {
         "bad_credentials": "Email atau kata sandi salah. Silakan coba lagi.",
         "user_not_verified": "Silakan verifikasi email Anda sebelum masuk.",
+        "access_denied": "Akses Ditolak. Silakan hubungi Admin Lab untuk mendaftarkan akun Anda.",
         "generic": "Gagal masuk. Silakan periksa kredensial Anda."
       }
     },
@@ -165,7 +166,7 @@
       "tag": "Edisi Arsip Taktil v2.4",
       "title": "Masa Depan Analisis Mikroba",
       "subtitle": "Gantikan penghitungan manual subjektif dengan presisi AI deterministik. PlateSense memberikan data mikrobiologi yang tidak dapat diubah dan siap audit dalam hitungan milidetik, bukan jam.",
-      "cta_deploy": "Terapkan PlateSense",
+      "cta_deploy": "Mulai Analisis",
       "cta_whitepaper": "Baca Whitepaper",
       "scan_complete": "PEMINDAIAN SELESAI",
       "confidence": "Keyakinan"
@@ -252,7 +253,7 @@
       "col_cfu": "CFU/ml",
       "col_action": "Aksi",
       "status_verified": "Terverifikasi",
-      "status_pending": "Menunggu OCR",
+      "status_draft": "Draf",
       "status_failed": "Gagal",
       "action_view": "Lihat Detail",
       "date_range": "Rentang Tanggal",
@@ -262,7 +263,7 @@
       "pagination_info": "Menampilkan {{start}} sampai {{end}} dari {{total}} entri",
       "unknown": "Tidak Diketahui",
       "finalized_short": "Selesai",
-      "pending_short": "Menunggu",
+      "draft_short": "Draf",
       "delete_title": "Hapus Analisis"
     },
     "admin": {
@@ -276,7 +277,7 @@
     "filters": {
       "all_statuses": "Semua Status",
       "finalized": "Selesai",
-      "pending_review": "Menunggu Tinjauan",
+      "awaiting_approval": "Menunggu Persetujuan",
       "draft": "Draf",
       "additional_opts": "Opsi pemfilteran tambahan akan muncul di sini."
     },
@@ -347,7 +348,7 @@
       "recent": "Sampel yang Baru Dianalisis",
       "view_history": "Lihat Riwayat",
       "finalized": "Selesai",
-      "pending": "Tertunda"
+      "draft": "Draf"
     },
     "admin": {
       "volume_title": "Volume Analisis Global",
@@ -395,10 +396,12 @@
         "search_placeholder": "Cari nama, email atau ID...",
         "all_roles": "Semua Peran Fungsional",
         "researchers": "Peneliti",
+        "lab_managers": "Manajer Lab",
         "administrators": "Administrator",
         "syncing": "Menyinkronkan direktori...",
         "col_user": "Pengguna Teridentifikasi",
         "col_group": "Grup Akses",
+        "col_supervisor": "Supervisor",
         "col_privilege": "Tingkat Hak Istimewa",
         "col_verification": "Verifikasi",
         "col_actions": "Hub Aksi",
@@ -410,8 +413,13 @@
         "grant_admin": "Berikan Hak Admin",
         "deactivate": "Nonaktifkan Akun",
         "activate": "Aktifkan Akun",
+        "assign_manager": "Tugaskan Manajer Lab",
+        "unassign_manager": "Hapus Manajer",
+        "create_user": "Buat Pengguna Baru",
+        "delete_user": "Hapus Akun Pengguna",
         "no_results": "Hasil tidak ditemukan",
-        "no_results_desc": "Sesuaikan pencarian atau filter Anda untuk menemukan anggota laboratorium tertentu."
+        "no_results_desc": "Sesuaikan pencarian atau filter Anda untuk menemukan anggota laboratorium tertentu.",
+        "access_denied": "Akses Ditolak. Silakan hubungi Admin Lab untuk mendaftarkan akun Anda."
       },
       "pagination": {
         "viewing_index": "Menampilkan Indeks",
@@ -550,7 +558,7 @@
       "verified": "Terverifikasi",
       "status_verified": "Terverifikasi",
       "loading": "Memuat...",
-      "pending": "Menunggu Tinjauan",
+      "awaiting_approval": "Menunggu Persetujuan",
       "finalized": "Catatan Selesai"
     },
     "actions": {
@@ -652,5 +660,30 @@
     "error": "Gagal memuat data.",
     "system": "Sistem",
     "unknown": "Tidak Diketahui"
+  },
+  "create_user_modal": {
+    "title": "Buat Akun Laboratorium",
+    "subtitle": "Inisialisasi identitas baru dalam ekosistem PlateSense.",
+    "full_name": "Nama Lengkap",
+    "email": "Alamat Email",
+    "password": "Kata Sandi Sementara",
+    "role": "Peran Fungsional",
+    "supervisor": "Tugaskan Supervisor",
+    "none": "Tidak Ada",
+    "submit": "Aktifkan Akun",
+    "creating": "Menyinkronkan...",
+    "success": "Akun berhasil dibuat.",
+    "error": "Gagal membuat akun.",
+    "validation": {
+      "name_req": "Nama lengkap wajib diisi.",
+      "email_req": "Email wajib diisi.",
+      "email_inv": "Format email tidak valid.",
+      "pass_req": "Kata sandi wajib diisi.",
+      "pass_len": "Min 8 karakter.",
+      "pass_upper": "Harus mengandung huruf besar.",
+      "pass_lower": "Harus mengandung huruf kecil.",
+      "pass_digit": "Harus mengandung angka.",
+      "pass_symbol": "Harus mengandung simbol."
+    }
   }
 }

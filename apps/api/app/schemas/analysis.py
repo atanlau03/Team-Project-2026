@@ -30,7 +30,7 @@ class AnalysisUpdate(BaseModel):
 class AnalysisFilter(BaseModel):
     scope: str = "mine"  # mine | team
     target_user_id: Optional[uuid.UUID] = None
-    status: Optional[str] = None
+    status: Optional[str | list[str]] = None
     media_type: Optional[str] = None
     search: Optional[str] = None
     date_from: Optional[datetime] = None

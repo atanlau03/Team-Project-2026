@@ -2,7 +2,7 @@ from fastapi import APIRouter
 
 from app.config import settings
 from app.dependencies import auth_backend, fastapi_users
-from app.schemas.user import UserCreate, UserRead, UserUpdate
+from app.schemas.user import UserRead, UserUpdate
 
 router = APIRouter()
 
@@ -13,12 +13,7 @@ router.include_router(
     tags=["Auth"],
 )
 
-# ── Register ─────────────────────────────────────────────
-router.include_router(
-    fastapi_users.get_register_router(UserRead, UserCreate),
-    prefix="/auth",
-    tags=["Auth"],
-)
+# ── Register (REMOVED — admin creates users manually) ────
 
 # ── Reset Password ───────────────────────────────────────
 router.include_router(

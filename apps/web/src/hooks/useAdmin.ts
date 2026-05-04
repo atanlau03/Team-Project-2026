@@ -1,5 +1,6 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import * as adminApi from '../api/admin';
+import type { AdminUserCreateRequest } from '../types';
 
 export const adminKeys = {
   all: ['admin'] as const,
@@ -17,6 +18,30 @@ export function useAdminUsers(params?: {
   return useQuery({
     queryKey: adminKeys.users(params),
     queryFn: () => adminApi.listUsers(params),
+  });
+}
+
+/** Create a new user */
+export function useCreateUser() {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: (body: AdminUserCreateRequest) => adminApi.createUser(body),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: adminKeys.all });
+    },
+  });
+}
+
+/** Delete a user */
+export function useDeleteUser() {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: (userId: string) => adminApi.deleteUser(userId),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: adminKeys.all });
+    },
   });
 }
 
@@ -48,6 +73,19 @@ export function useUpdateUserStatus() {
   return useMutation({
     mutationFn: ({ userId, is_active }: { userId: string; is_active: boolean }) =>
       adminApi.updateUserStatus(userId, is_active),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: adminKeys.all });
+    },
+  });
+}
+
+/** Assign a supervisor to a researcher */
+export function useAssignSupervisor() {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: ({ userId, supervisorId }: { userId: string; supervisorId: string | null }) =>
+      adminApi.assignSupervisor(userId, supervisorId),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: adminKeys.all });
     },

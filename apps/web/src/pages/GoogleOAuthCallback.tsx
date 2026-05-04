@@ -29,7 +29,9 @@ export default function GoogleOAuthCallback() {
         })
         .catch((err) => {
           console.error('OAuth Error:', err);
-          navigate('/login?error=oauth_failed', { replace: true });
+          const isAccessDenied = err?.response?.status === 403 || err?.message?.includes('403');
+          const errorType = isAccessDenied ? 'access_denied' : 'oauth_failed';
+          navigate(`/login?error=${errorType}`, { replace: true });
         });
     } else {
       const accessToken = searchParams.get('access_token');

@@ -26,10 +26,17 @@ class User(SQLAlchemyBaseUserTableUUID, Base):
     full_name: Mapped[str] = mapped_column(String(255), nullable=False, default="")
     title: Mapped[str | None] = mapped_column(String(100), nullable=True)
     avatar_url: Mapped[str | None] = mapped_column(Text, nullable=True)
-    role: Mapped[str] = mapped_column(String(20), nullable=False, default="researcher")  # researcher | admin
+    role: Mapped[str] = mapped_column(String(20), nullable=False, default="researcher")  # researcher | lab_manager | admin
 
     organization_id: Mapped[uuid.UUID | None] = mapped_column(
         UUID(as_uuid=True), ForeignKey("organization.id"), nullable=True
+    )
+
+    # ── Team Supervision ─────────────────────────────────
+    # Admin assigns researchers to a lab_manager via this FK.
+    # Lab managers see only their team's data in dashboard/history.
+    supervisor_id: Mapped[uuid.UUID | None] = mapped_column(
+        UUID(as_uuid=True), ForeignKey("user.id"), nullable=True
     )
 
     created_at: Mapped[datetime] = mapped_column(
@@ -50,7 +57,23 @@ class User(SQLAlchemyBaseUserTableUUID, Base):
     oauth_accounts: Mapped[list["OAuthAccount"]] = relationship(
         "OAuthAccount", lazy="selectin"
     )
+    supervisor: Mapped["User | None"] = relationship(
+        "User", remote_side="User.id", foreign_keys=[supervisor_id], lazy="selectin"
+    )
+    team_members: Mapped[list["User"]] = relationship(
+        "User", foreign_keys=[supervisor_id], lazy="noload"
+    )
 
     @property
     def organization_name(self) -> str | None:
-        return self.organization.name if self.organization else None
+        # Check if relationship is loaded to avoid DetachedInstanceError
+        if "organization" in self.__dict__ and self.organization:
+            return self.organization.name
+        return None
+
+    @property
+    def supervisor_name(self) -> str | None:
+        # Check if relationship is loaded to avoid DetachedInstanceError
+        if "supervisor" in self.__dict__ and self.supervisor:
+            return self.supervisor.full_name
+        return None

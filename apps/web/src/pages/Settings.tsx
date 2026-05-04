@@ -21,8 +21,6 @@ export default function Settings() {
 
   const [name, setName] = useState('');
   const [lab, setLab] = useState('');
-  const [defaultVolume, setDefaultVolume] = useState<number>(1);
-  const [defaultDilution, setDefaultDilution] = useState<number>(0);
   const [profileSaved, setProfileSaved] = useState(false);
 
   // Sync state with user data on load
@@ -35,10 +33,7 @@ export default function Settings() {
 
   // Sync defaults with settings
   useEffect(() => {
-    if (settings) {
-      setDefaultVolume(settings.default_volume_ul / 1000);
-      setDefaultDilution(settings.default_dilution_exp);
-    }
+    // Laboratory defaults sync removed as per user request
   }, [settings]);
 
   const handleThemeChange = (theme: 'light' | 'dark') => {
@@ -56,17 +51,6 @@ export default function Settings() {
     });
   };
 
-  const handleSaveLabDefaults = async () => {
-    try {
-      await updateSettings.mutateAsync({
-        default_volume_ul: defaultVolume * 1000,
-        default_dilution_exp: defaultDilution
-      });
-      showNotification(t('settings.messages.settings_success'), 'success');
-    } catch {
-      showNotification(t('settings.messages.settings_error'), 'error');
-    }
-  };
 
   const handleAuditExport = () => {
     exportAuditLog.mutate(undefined, {
@@ -296,47 +280,6 @@ export default function Settings() {
                   ))}
                 </div>
 
-                <div className="space-y-6 pt-6 border-t border-outline-variant/10">
-                  <div className="flex items-center gap-3 mb-2">
-                    <span className="material-symbols-outlined text-primary text-lg">tune</span>
-                    <h4 className="font-headline font-bold text-on-surface text-sm uppercase tracking-wider">{t('settings.defaults.lab_config_title')}</h4>
-                  </div>
-                  
-                  <div className="grid grid-cols-1 gap-4">
-                    <div className="space-y-2">
-                      <label className="text-[10px] font-mono-tech uppercase tracking-widest text-on-surface-variant">{t('settings.defaults.volume_label')}</label>
-                      <input 
-                        type="number" 
-                        step="0.1"
-                        value={defaultVolume}
-                        onChange={(e) => setDefaultVolume(parseFloat(e.target.value))}
-                        className="w-full bg-surface-container-highest/20 border border-outline-variant/20 rounded-xl px-4 py-2.5 text-sm font-body text-on-surface focus:border-primary/40 focus:outline-none transition-all"
-                      />
-                    </div>
-                    <div className="space-y-2">
-                      <label className="text-[10px] font-mono-tech uppercase tracking-widest text-on-surface-variant">{t('settings.defaults.dilution_label')}</label>
-                      <input 
-                        type="number" 
-                        value={defaultDilution}
-                        onChange={(e) => setDefaultDilution(parseInt(e.target.value))}
-                        className="w-full bg-surface-container-highest/20 border border-outline-variant/20 rounded-xl px-4 py-2.5 text-sm font-body text-on-surface focus:border-primary/40 focus:outline-none transition-all"
-                      />
-                    </div>
-                  </div>
-
-                  <button 
-                    onClick={handleSaveLabDefaults}
-                    disabled={updateSettings.isPending}
-                    className="w-full mt-2 py-3 bg-primary/10 text-primary hover:bg-primary hover:text-white rounded-xl font-headline font-bold text-[10px] uppercase tracking-[0.2em] transition-all duration-300 flex items-center justify-center gap-2"
-                  >
-                    {updateSettings.isPending ? (
-                      <span className="material-symbols-outlined animate-spin text-sm">sync</span>
-                    ) : (
-                      <span className="material-symbols-outlined text-sm">save</span>
-                    )}
-                    {t('settings.defaults.save_btn')}
-                  </button>
-                </div>
               </div>
             </section>
 

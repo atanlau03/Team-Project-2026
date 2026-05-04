@@ -88,4 +88,4 @@ async def export_audit(
     db: AsyncSession = Depends(get_async_session),
 ):
     """Export the entire system audit trail to CSV."""
-    return await export_service.export_audit_log(db)
+    return await export_service.export_audit_log(db, user)

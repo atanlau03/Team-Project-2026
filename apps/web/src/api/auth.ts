@@ -1,5 +1,5 @@
 import apiClient, { TOKEN_KEY } from '../lib/axios';
-import type { AuthTokenResponse, RegisterRequest, User, UserUpdateRequest } from '../types';
+import type { AuthTokenResponse, User, UserUpdateRequest } from '../types';
 
 /** Login — FastAPI Users expects form-encoded username+password */
 export async function login(email: string, password: string): Promise<AuthTokenResponse> {
@@ -10,12 +10,6 @@ export async function login(email: string, password: string): Promise<AuthTokenR
   const { data } = await apiClient.post<AuthTokenResponse>('/auth/login', params, {
     headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
   });
-  return data;
-}
-
-/** Register a new user */
-export async function register(body: RegisterRequest): Promise<User> {
-  const { data } = await apiClient.post<User>('/auth/register', body);
   return data;
 }
 

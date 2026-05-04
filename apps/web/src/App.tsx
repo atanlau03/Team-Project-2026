@@ -4,7 +4,6 @@ import ProtectedRoute from './components/ProtectedRoute';
 import RoleGuard from './components/RoleGuard';
 import Dashboard from './pages/Dashboard';
 import Login from './pages/Login';
-import Register from './pages/Register';
 import NewAnalysis from './pages/NewAnalysis';
 import AnalysisDetail from './pages/AnalysisDetail';
 import BattleMode from './pages/BattleMode';
@@ -46,22 +45,21 @@ function App() {
           {/* Public routes */}
           <Route path="/" element={<Landing />} />
           <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Register />} />
           <Route path="/forgot-password" element={<ForgotPassword />} />
           <Route path="/reset-password" element={<ResetPassword />} />
           <Route path="/auth/google/callback" element={<GoogleOAuthCallback />} />
   
           {/* Protected routes */}
           <Route path="/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
-          <Route path="/new-analysis" element={<ProtectedRoute><RoleGuard role="researcher"><NewAnalysis /></RoleGuard></ProtectedRoute>} />
+          <Route path="/new-analysis" element={<ProtectedRoute><RoleGuard roles={["researcher", "lab_manager"]}><NewAnalysis /></RoleGuard></ProtectedRoute>} />
           <Route path="/analysis/:id" element={<ProtectedRoute><AnalysisDetail /></ProtectedRoute>} />
           <Route path="/analysis-detail" element={<ProtectedRoute><AnalysisDetail /></ProtectedRoute>} />
-          <Route path="/battle-mode" element={<ProtectedRoute><RoleGuard role="researcher"><BattleMode /></RoleGuard></ProtectedRoute>} />
+          <Route path="/battle-mode" element={<ProtectedRoute><RoleGuard roles={["researcher", "lab_manager"]}><BattleMode /></RoleGuard></ProtectedRoute>} />
           <Route path="/history" element={<ProtectedRoute><History /></ProtectedRoute>} />
           <Route path="/settings" element={<ProtectedRoute><Settings /></ProtectedRoute>} />
 
           {/* Admin-only routes */}
-          <Route path="/admin" element={<ProtectedRoute><RoleGuard role="admin"><AdminPanel /></RoleGuard></ProtectedRoute>} />
+          <Route path="/admin" element={<ProtectedRoute><RoleGuard roles={["admin"]}><AdminPanel /></RoleGuard></ProtectedRoute>} />
         </Routes>
       </BrowserRouter>
     </NotificationProvider>

@@ -23,9 +23,12 @@ export default function TopNav() {
   const { user, isAdmin, logout } = useAuth();
   const { t } = useTranslation();
 
+  const isLabManager = user?.role === 'lab_manager';
+  const isResearcher = user?.role === 'researcher' || !user?.role;
+
   const navLinks = [
     ...baseLinks,
-    ...(!isAdmin ? researcherLinks : []),
+    ...(isResearcher ? researcherLinks : []),
     ...(isAdmin ? adminLinks : []),
     { path: '/settings', key: 'nav.settings' },
   ];

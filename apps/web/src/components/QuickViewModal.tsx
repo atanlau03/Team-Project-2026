@@ -161,12 +161,12 @@ export default function QuickViewModal({ id, onClose }: QuickViewModalProps) {
               >
                 {t('quick_view.close')}
               </button>
-              {analysis.status === 'ai_complete' && (
+              {(analysis.status === 'ai_complete' || analysis.status === 'awaiting_approval') && (
                 <button 
                   onClick={() => navigate(`/analysis/${id}`)}
                   className="bg-primary text-on-primary px-8 py-3 rounded-xl font-headline font-bold text-sm shadow-lg hover:opacity-90 transition-opacity flex items-center gap-2"
                 >
-                  {t('quick_view.verify_finalize')}
+                  {analysis.status === 'awaiting_approval' ? 'Review & Finalize' : t('quick_view.verify_finalize')}
                   <span className="material-symbols-outlined text-lg">arrow_forward</span>
                 </button>
               )}

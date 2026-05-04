@@ -129,6 +129,11 @@ async def _recalculate_final_count(db: AsyncSession, analysis_id: uuid.UUID) -> 
     analysis = result.scalar_one_or_none()
     if analysis:
         analysis.final_colony_count = count
-        if count > 0:
-            dilution = 10 ** analysis.dilution_factor
-            analysis.calculated_cfu_ml = count / (analysis.volume_plated_ml * dilution)
+        if count > 0 and analysis.volume_plated_ml > 0:
+            try:
+                dilution = 10 ** analysis.dilution_factor
+                analysis.calculated_cfu_ml = count / (analysis.volume_plated_ml * dilution)
+            except OverflowError:
+                analysis.calculated_cfu_ml = 0.0
+        else:
+            analysis.calculated_cfu_ml = 0.0

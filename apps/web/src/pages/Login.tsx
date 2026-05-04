@@ -8,7 +8,7 @@ export default function Login() {
   const { t } = useTranslation();
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
-  const justRegistered = searchParams.get('registered') === 'true';
+  const errorParam = searchParams.get('error');
   const { login, loginError, isLoginPending } = useAuth();
 
   const [email, setEmail] = useState('');
@@ -37,6 +37,8 @@ export default function Login() {
     }
   };
 
+  const displayError = loginError || googleError || (errorParam === 'access_denied' ? t('auth.login.errors.access_denied', { defaultValue: 'Access Denied. Please contact the Lab Admin to register your account.' }) : null);
+
   return (
     <div className="min-h-screen flex w-full bg-surface transition-colors duration-500 overflow-hidden">
       {/* Left Panel: Login Form */}
@@ -58,17 +60,10 @@ export default function Login() {
 
           {/* Messages */}
           <div className="space-y-4">
-            {justRegistered && (
-              <div className="p-4 rounded-2xl bg-tertiary/10 border border-tertiary/20 text-tertiary text-sm font-body flex items-center gap-3 animate-in zoom-in duration-300">
-                <span className="material-symbols-outlined text-[20px]">check_circle</span>
-                {t('auth.login.success_reg')}
-              </div>
-            )}
-
-            {(loginError || googleError) && (
+            {displayError && (
               <div className="p-4 rounded-2xl bg-error/10 border border-error/20 text-error text-sm font-body flex items-center gap-3 animate-in zoom-in duration-300">
                 <span className="material-symbols-outlined text-[20px]">error</span>
-                {loginError || googleError}
+                {displayError}
               </div>
             )}
           </div>
@@ -174,10 +169,6 @@ export default function Login() {
             </button>
           </form>
 
-          <p className="text-center text-on-surface-variant font-medium">
-            {t('auth.login.no_account')}
-            <Link className="text-primary font-bold hover:underline underline-offset-4 ml-2 transition-all" to="/register">{t('auth.login.register_link')}</Link>
-          </p>
         </div>
       </div>
 

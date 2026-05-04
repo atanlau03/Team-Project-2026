@@ -78,6 +78,19 @@ export function useUpdateAnalysis() {
   });
 }
 
+/** Submit an analysis for supervisor review */
+export function useSubmitAnalysis() {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: (analysisId: string) => analysesApi.submitAnalysis(analysisId),
+    onSuccess: (_data, analysisId) => {
+      queryClient.invalidateQueries({ queryKey: analysisKeys.detail(analysisId) });
+      queryClient.invalidateQueries({ queryKey: analysisKeys.lists() });
+    },
+  });
+}
+
 /** Finalize and lock an analysis */
 export function useFinalizeAnalysis() {
   const queryClient = useQueryClient();

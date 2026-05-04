@@ -3,7 +3,7 @@ import math
 from datetime import datetime, timezone, timedelta
 from typing import Optional
 
-from sqlalchemy import select, func
+from sqlalchemy import select, func, or_
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.models.analysis import Analysis
@@ -18,6 +18,13 @@ from app.schemas.dashboard import (
 )
 
 
+def _team_user_ids_subquery(user_id: uuid.UUID):
+    """Subquery: returns user IDs that belong to this lab_manager's team (including self)."""
+    return select(User.id).where(
+        or_(User.supervisor_id == user_id, User.id == user_id)
+    )
+
+
 async def get_overview(
     db: AsyncSession,
     user_id: uuid.UUID,
@@ -28,9 +35,12 @@ async def get_overview(
     today_start = datetime.now(timezone.utc).replace(hour=0, minute=0, second=0, microsecond=0)
     yesterday_start = today_start - timedelta(days=1)
 
-    # Total colonies today — admin sees ALL, researcher sees org/own
+    # Total colonies today — admin sees ALL, lab_manager sees team, researcher sees org/own
     base = select(func.coalesce(func.sum(Analysis.final_colony_count), 0))
-    if role != "admin":
+    if role == "lab_manager":
+        team_ids = _team_user_ids_subquery(user_id)
+        base = base.where(Analysis.user_id.in_(team_ids))
+    elif role != "admin":
         if organization_id:
             base = base.join(User, Analysis.user_id == User.id).where(
                 User.organization_id == organization_id
@@ -63,16 +73,22 @@ async def get_overview(
     )
     avg_accuracy = (await db.execute(accuracy_stmt)).scalar() or 0.994
 
-    # Today's analysis count
-    count_stmt = select(func.count()).where(Analysis.created_at >= today_start)
+    # Today's analysis count (scoped)
+    count_stmt = select(func.count()).select_from(Analysis).where(Analysis.created_at >= today_start)
+    if role == "lab_manager":
+        team_ids = _team_user_ids_subquery(user_id)
+        count_stmt = count_stmt.where(Analysis.user_id.in_(team_ids))
+    elif role != "admin":
+        count_stmt = count_stmt.where(Analysis.user_id == user_id)
     total_analyses = (await db.execute(count_stmt)).scalar() or 0
 
     # Unverified count (Action required)
-    unverified_stmt = select(func.count())
-    if role != "admin":
-        unverified_stmt = unverified_stmt.where(Analysis.status == "ai_complete", Analysis.user_id == user_id)
-    else:
-        unverified_stmt = unverified_stmt.where(Analysis.status == "ai_complete")
+    unverified_stmt = select(func.count()).select_from(Analysis).where(Analysis.status == "ai_complete")
+    if role == "lab_manager":
+        team_ids = _team_user_ids_subquery(user_id)
+        unverified_stmt = unverified_stmt.where(Analysis.user_id.in_(team_ids))
+    elif role != "admin":
+        unverified_stmt = unverified_stmt.where(Analysis.user_id == user_id)
     unverified_count = (await db.execute(unverified_stmt)).scalar() or 0
 
     # Time saved: 5 mins per plate manual vs ~1 sec AI. 
@@ -101,7 +117,10 @@ async def get_overview(
         select(Colony.species_name, func.count().label('cnt'))
         .join(Analysis, Colony.analysis_id == Analysis.id)
     )
-    if role != "admin":
+    if role == "lab_manager":
+        team_ids = _team_user_ids_subquery(user_id)
+        species_stmt = species_stmt.where(Analysis.user_id.in_(team_ids))
+    elif role != "admin":
         if organization_id:
             species_stmt = species_stmt.join(User, Analysis.user_id == User.id).where(User.organization_id == organization_id)
         else:
@@ -140,14 +159,17 @@ async def get_live_activity(
     limit: int = 10,
     role: str = "researcher",
 ) -> list[ActivityItem]:
-    """Recent activity stream. Admin sees all users."""
+    """Recent activity stream. Admin sees all users, lab_manager sees team."""
     stmt = (
         select(AuditEvent, User.full_name, User.avatar_url, Analysis.sample_id)
         .outerjoin(User, AuditEvent.user_id == User.id)
         .join(Analysis, AuditEvent.analysis_id == Analysis.id)
     )
 
-    if role != "admin":
+    if role == "lab_manager":
+        team_ids = _team_user_ids_subquery(user_id)
+        stmt = stmt.where(AuditEvent.user_id.in_(team_ids))
+    elif role != "admin":
         if organization_id:
             # Filter by org using the user already joined via AuditEvent.user_id
             stmt = stmt.where(User.organization_id == organization_id)
@@ -189,6 +211,12 @@ async def get_cfu_trend(
         if role == "admin":
             if target_user_id:
                 base = base.where(Analysis.user_id == target_user_id)
+        elif role == "lab_manager":
+            team_ids = _team_user_ids_subquery(user_id)
+            if target_user_id:
+                base = base.where(Analysis.user_id == target_user_id)
+            else:
+                base = base.where(Analysis.user_id.in_(team_ids))
         elif organization_id:
             base = base.join(User, Analysis.user_id == User.id).where(User.organization_id == organization_id)
             if target_user_id:

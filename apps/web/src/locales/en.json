@@ -103,6 +103,7 @@
       "errors": {
         "bad_credentials": "Invalid email or password. Please try again.",
         "user_not_verified": "Please verify your email before logging in.",
+        "access_denied": "Access Denied. Please contact the Lab Admin to register your account.",
         "generic": "Login failed. Please check your credentials."
       }
     },
@@ -182,7 +183,7 @@
       "tag": "Tactile Archive Edition v2.4",
       "title": "The Future of Microbial Analysis",
       "subtitle": "Replace subjective manual counting with deterministic AI precision. PlateSense delivers immutable, audit-ready microbiological data in milliseconds, not hours.",
-      "cta_deploy": "Deploy PlateSense",
+      "cta_deploy": "Start Analysis",
       "cta_whitepaper": "Read the Whitepaper",
       "scan_complete": "SCAN COMPLETE",
       "confidence": "Confidence"
@@ -269,7 +270,7 @@
       "col_cfu": "CFU/ml",
       "col_action": "Action",
       "status_verified": "Verified",
-      "status_pending": "Pending OCR",
+      "status_draft": "Draft",
       "status_failed": "Failed",
       "action_view": "View Details",
       "date_range": "Date Range",
@@ -279,7 +280,7 @@
       "pagination_info": "Showing {{start}} to {{end}} of {{total}} entries",
       "unknown": "Unknown",
       "finalized_short": "Finalized",
-      "pending_short": "Pending",
+      "draft_short": "Draft",
       "delete_title": "Delete Analysis"
     },
     "admin": {
@@ -293,7 +294,7 @@
     "filters": {
       "all_statuses": "All Statuses",
       "finalized": "Finalized",
-      "pending_review": "Pending Review",
+      "awaiting_approval": "Awaiting Approval",
       "draft": "Draft",
       "additional_opts": "Additional filtering options will appear here."
     },
@@ -412,10 +413,12 @@
         "search_placeholder": "Search name, email or ID...",
         "all_roles": "All Functional Roles",
         "researchers": "Researchers",
+        "lab_managers": "Lab Managers",
         "administrators": "Administrators",
         "syncing": "Syncing directory...",
         "col_user": "Identified User",
         "col_group": "Access Group",
+        "col_supervisor": "Supervisor",
         "col_privilege": "Privilege Level",
         "col_verification": "Verification",
         "col_actions": "Action Hub",
@@ -427,6 +430,10 @@
         "grant_admin": "Grant Admin Privileges",
         "deactivate": "Deactivate Account",
         "activate": "Activate Account",
+        "assign_manager": "Assign Lab Manager",
+        "unassign_manager": "Unassign Manager",
+        "create_user": "Create New User",
+        "delete_user": "Delete User Account",
         "no_results": "No results found",
         "no_results_desc": "Adjust your search or filter to find specific laboratory members."
       },
@@ -570,7 +577,7 @@
       "verified": "Verified",
       "status_verified": "Verified",
       "loading": "Loading...",
-      "pending": "Pending Review",
+      "awaiting_approval": "Awaiting Approval",
       "finalized": "Record Finalized"
     },
     "actions": {
@@ -672,5 +679,30 @@
     "error": "Failed to load data.",
     "system": "System",
     "unknown": "Unknown"
+  },
+  "create_user_modal": {
+    "title": "Create Laboratory Account",
+    "subtitle": "Initialize a new identity within the PlateSense ecosystem.",
+    "full_name": "Full Name",
+    "email": "Email Address",
+    "password": "Temporary Password",
+    "role": "Functional Role",
+    "supervisor": "Assign Supervisor",
+    "none": "None",
+    "submit": "Establish Account",
+    "creating": "Synchronizing...",
+    "success": "Account established successfully.",
+    "error": "Failed to create account.",
+    "validation": {
+      "name_req": "Full name is required.",
+      "email_req": "Email is required.",
+      "email_inv": "Invalid email format.",
+      "pass_req": "Password is required.",
+      "pass_len": "Min 8 characters.",
+      "pass_upper": "Must contain uppercase.",
+      "pass_lower": "Must contain lowercase.",
+      "pass_digit": "Must contain a digit.",
+      "pass_symbol": "Must contain a symbol."
+    }
   }
 }

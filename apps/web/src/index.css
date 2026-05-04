@@ -3,6 +3,9 @@
 @tailwind utilities;
 
 @layer base {
+  html {
+    scroll-behavior: smooth;
+  }
   :root {
     --color-inverse-surface: #32302c;
     --color-on-tertiary: #ffffff;

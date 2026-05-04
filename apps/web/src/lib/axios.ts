@@ -18,6 +18,9 @@ const apiClient = axios.create({
   headers: {
     'Content-Type': 'application/json',
   },
+  paramsSerializer: {
+    indexes: null, // serialize arrays as status=a&status=b
+  },
 });
 
 // ── Request interceptor: attach JWT ─────────────────────

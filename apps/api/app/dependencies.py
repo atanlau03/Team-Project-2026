@@ -1,7 +1,7 @@
 import uuid
 from typing import Optional
 
-from fastapi import Depends, Request
+from fastapi import Depends, Request, HTTPException
 from fastapi_users import BaseUserManager, FastAPIUsers, UUIDIDMixin, schemas
 from fastapi_users.authentication import (
     AuthenticationBackend,
@@ -101,6 +101,45 @@ class UserManager(UUIDIDMixin, BaseUserManager[User, uuid.UUID]):
         # TODO: Send verification email
         print(f"Verification requested for {user.email}. Token: {token}")
 
+    async def oauth_callback(
+        self,
+        oauth_name: str,
+        access_token: str,
+        account_id: str,
+        account_email: str,
+        expires_at: Optional[int] = None,
+        refresh_token: Optional[str] = None,
+        request: Optional[Request] = None,
+        *,
+        associate_by_email: bool = False,
+        is_verified_by_default: bool = False,
+    ) -> User:
+        """
+        Override to BLOCK auto-registration for Google OAuth.
+        If the user's email is not already in the database, reject with 403.
+        """
+        # Check if user already exists by email
+        existing_user = await self.user_db.get_by_email(account_email)
+
+        if existing_user is None:
+            raise HTTPException(
+                status_code=403,
+                detail="Access Denied. Please contact the Lab Admin to register your account.",
+            )
+
+        # User exists — proceed with the normal OAuth flow
+        return await super().oauth_callback(
+            oauth_name,
+            access_token,
+            account_id,
+            account_email,
+            expires_at,
+            refresh_token,
+            request,
+            associate_by_email=associate_by_email,
+            is_verified_by_default=is_verified_by_default,
+        )
+
 
 async def get_user_manager(user_db=Depends(get_user_db)):
     yield UserManager(user_db)
@@ -148,4 +187,7 @@ def require_role(*allowed_roles: str):
 
 
 current_admin = require_role("admin")
+current_lab_manager = require_role("lab_manager", "admin")
+current_researcher = require_role("researcher", "lab_manager", "admin")
+
 

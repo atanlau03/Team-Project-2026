@@ -1,7 +1,7 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import * as authApi from '../api/auth';
 import { TOKEN_KEY } from '../lib/axios';
-import type { RegisterRequest, UserUpdateRequest } from '../types';
+import type { UserUpdateRequest } from '../types';
 
 export const userKeys = {
   me: ['user'] as const,
@@ -28,13 +28,6 @@ export function useLogin() {
       localStorage.setItem(TOKEN_KEY, data.access_token);
       queryClient.invalidateQueries({ queryKey: userKeys.me });
     },
-  });
-}
-
-/** Register mutation */
-export function useRegister() {
-  return useMutation({
-    mutationFn: (body: RegisterRequest) => authApi.register(body),
   });
 }
 

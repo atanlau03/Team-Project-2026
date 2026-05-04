@@ -23,8 +23,7 @@ export default function Landing() {
 
           {/* Actions */}
           <div className="flex items-center gap-4">
-            <Link className="text-stone-800 dark:text-stone-100 font-body text-sm font-semibold hover:bg-stone-200/50 dark:hover:bg-stone-800/50 transition-all px-4 py-2 rounded-lg" to="/login">{t('landing.nav.login')}</Link>
-            <Link className="btn-primary px-6 py-2.5 font-body text-sm font-semibold" to="/register">{t('landing.nav.demo')}</Link>
+            <Link className="btn-primary px-6 py-2.5 font-body text-sm font-semibold" to="/login">{t('landing.nav.login')}</Link>
           </div>
         </div>
       </nav>
@@ -47,7 +46,7 @@ export default function Landing() {
                 {t('landing.hero.subtitle')}
               </p>
               <div className="flex flex-col sm:flex-row gap-4 pt-4">
-                <Link className="btn-primary px-8 py-4 text-center font-body font-semibold text-lg flex items-center justify-center gap-2 hover:scale-[1.02] active:scale-[0.98] transition-transform duration-300 shadow-lg shadow-primary/20" to="/dashboard">
+                <Link className="btn-primary px-8 py-4 text-center font-body font-semibold text-lg flex items-center justify-center gap-2 hover:scale-[1.02] active:scale-[0.98] transition-transform duration-300 shadow-lg shadow-primary/20" to="/login">
                   {t('landing.hero.cta_deploy')}
                   <span className="material-symbols-outlined text-sm">arrow_forward</span>
                 </Link>
@@ -149,7 +148,7 @@ export default function Landing() {
         </section>
 
         {/* Analysis Workflow Section (Steps) */}
-        <section className="py-32 bg-stone-50 dark:bg-stone-950 transition-colors">
+        <section id="solutions" className="py-32 bg-stone-50 dark:bg-stone-950 transition-colors">
           <div className="max-w-7xl mx-auto px-8">
             <div className="mb-20 text-center">
               <h2 className="text-4xl lg:text-5xl font-black text-on-surface mb-6 tracking-tight">{t('landing.workflow.title')}</h2>
@@ -208,7 +207,7 @@ export default function Landing() {
               <h2 className="text-3xl lg:text-4xl font-extrabold text-on-surface mb-6">{t('landing.cta.title')}</h2>
               <p className="font-body text-on-surface-variant text-lg mb-10">{t('landing.cta.subtitle')}</p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <Link className="btn-primary px-8 py-4 font-body font-semibold text-lg hover:scale-[1.02] active:scale-[0.98] transition-transform duration-300 shadow-lg shadow-primary/20" to="/register">
+                <Link className="btn-primary px-8 py-4 font-body font-semibold text-lg hover:scale-[1.02] active:scale-[0.98] transition-transform duration-300 shadow-lg shadow-primary/20" to="/login">
                   {t('landing.cta.get_started')}
                 </Link>
               </div>

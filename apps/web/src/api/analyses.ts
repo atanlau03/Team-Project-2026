@@ -45,6 +45,12 @@ export async function updateAnalysis(analysisId: string, body: AnalysisUpdateReq
   return data;
 }
 
+/** Submit an analysis for supervisor review */
+export async function submitAnalysis(analysisId: string): Promise<AnalysisDetail> {
+  const { data } = await apiClient.post<AnalysisDetail>(`/analyses/${analysisId}/submit`);
+  return data;
+}
+
 /** Finalize and lock an analysis */
 export async function finalizeAnalysis(analysisId: string): Promise<AnalysisDetail> {
   const { data } = await apiClient.post<AnalysisDetail>(`/analyses/${analysisId}/finalize`);

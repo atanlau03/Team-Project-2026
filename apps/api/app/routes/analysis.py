@@ -78,6 +78,38 @@ async def run_ai_inference(
         raise e
 
 
+@router.post("/{analysis_id}/submit", response_model=AnalysisDetail)
+async def submit_analysis(
+    analysis_id: uuid.UUID,
+    user: User = Depends(current_active_user),
+    db: AsyncSession = Depends(get_async_session),
+):
+    """Submit an analysis for supervisor review."""
+    try:
+        await analysis_service.submit_for_approval(db, analysis_id, user.id)
+        await db.commit()
+        return await analysis_service.get_analysis(db, analysis_id)
+    except Exception as e:
+        await db.rollback()
+        raise e
+
+
+@router.post("/{analysis_id}/finalize", response_model=AnalysisDetail)
+async def finalize_analysis(
+    analysis_id: uuid.UUID,
+    user: User = Depends(current_active_user),
+    db: AsyncSession = Depends(get_async_session),
+):
+    """Finalize and lock an analysis. Allowed for owner or supervisor."""
+    try:
+        await analysis_service.finalize_analysis(db, analysis_id, user.id)
+        await db.commit()
+        return await analysis_service.get_analysis(db, analysis_id)
+    except Exception as e:
+        await db.rollback()
+        raise e
+
+
 @router.get("/{analysis_id}", response_model=AnalysisDetail)
 async def get_analysis(
     analysis_id: uuid.UUID,
@@ -105,27 +137,12 @@ async def update_analysis(
         raise e
 
 
-@router.post("/{analysis_id}/finalize", response_model=AnalysisDetail)
-async def finalize_analysis(
-    analysis_id: uuid.UUID,
-    user: User = Depends(current_active_user),
-    db: AsyncSession = Depends(get_async_session),
-):
-    """Finalize and lock an analysis (Step 3)."""
-    try:
-        await analysis_service.finalize_analysis(db, analysis_id, user.id)
-        await db.commit()
-        return await analysis_service.get_analysis(db, analysis_id)
-    except Exception as e:
-        await db.rollback()
-        raise e
-
 
 @router.get("/", response_model=PaginatedAnalyses)
 async def list_analyses(
     scope: str = Query("mine", pattern="^(mine|team)$"),
     target_user_id: Optional[uuid.UUID] = None,
-    status: Optional[str] = None,
+    status: Optional[list[str]] = Query(None),
     media_type: Optional[str] = None,
     search: Optional[str] = None,
     date_from: Optional[datetime] = None,
